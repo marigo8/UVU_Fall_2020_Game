@@ -22,15 +22,26 @@ public class CharacterMover : MonoBehaviour
     
     private void Update()
     {
-        Debug.Log(controller.isGrounded);
-        Debug.Log(controller.velocity);
-        
+        Walk();
+        JumpAndGravity();
+        controller.Move(movement*Time.deltaTime);
+    }
+    
+    private void Walk()
+    {
         walkingMovement.x = Input.GetAxis("Horizontal");
         walkingMovement.y = Input.GetAxis("Vertical");
-        walkingMovement = Vector2.ClampMagnitude(walkingMovement, 1f) * moveSpeed; // so that moving diagonally doesn't make the character speed up
+        walkingMovement = Vector2.ClampMagnitude(walkingMovement, 1f) * moveSpeed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            walkingMovement *= sprintModifier;
+        }
         movement.x = walkingMovement.x;
         movement.z = walkingMovement.y;
-        
+    }
+
+    private void JumpAndGravity()
+    {
         movement.y += gravity * Time.deltaTime;
         if (Input.GetButtonDown("Jump") && canJump)
         {
@@ -47,7 +58,5 @@ public class CharacterMover : MonoBehaviour
             canJump = true;
             
         }
-
-        controller.Move(movement*Time.deltaTime);
     }
 }
