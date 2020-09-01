@@ -7,6 +7,7 @@ public class CharacterMover : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 movement;
+    private Vector2 walkingMovement;
     public float gravity = -9.81f;
     public float moveSpeed = 3f;
     public float sprintModifier = 1.5f;
@@ -18,14 +19,19 @@ public class CharacterMover : MonoBehaviour
         controller = GetComponent<CharacterController>();
     }
 
+    
     private void Update()
     {
         Debug.Log(controller.isGrounded);
         Debug.Log(controller.velocity);
         
-        movement.x = Input.GetAxis("Horizontal")*moveSpeed;
-        movement.z = Input.GetAxis("Vertical")*moveSpeed;
+        walkingMovement.x = Input.GetAxis("Horizontal");
+        walkingMovement.y = Input.GetAxis("Vertical");
+        walkingMovement = Vector2.ClampMagnitude(walkingMovement, 1f) * moveSpeed; // so that moving diagonally doesn't make the character speed up
+        movement.x = walkingMovement.x;
+        movement.z = walkingMovement.y;
         
+        movement.y += gravity * Time.deltaTime;
         if (Input.GetButtonDown("Jump") && canJump)
         {
             if(!controller.isGrounded)
@@ -40,10 +46,6 @@ public class CharacterMover : MonoBehaviour
             movement.y = -1;
             canJump = true;
             
-        }
-        else
-        {
-            movement.y += gravity * Time.deltaTime;
         }
 
         controller.Move(movement*Time.deltaTime);
