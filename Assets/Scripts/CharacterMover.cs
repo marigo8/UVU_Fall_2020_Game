@@ -21,6 +21,7 @@ public class CharacterMover : MonoBehaviour
     private void Update()
     {
         Debug.Log(controller.isGrounded);
+        Debug.Log(controller.velocity);
         
         movement.x = Input.GetAxis("Horizontal")*moveSpeed;
         movement.z = Input.GetAxis("Vertical")*moveSpeed;
@@ -34,11 +35,11 @@ public class CharacterMover : MonoBehaviour
             movement.y = jumpForce;
             
         }
-
-        if (controller.isGrounded)
+        else if (controller.isGrounded)
         {
-            //movement.y = 0;
+            movement.y = -1;
             canJump = true;
+            
         }
         else
         {
