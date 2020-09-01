@@ -5,44 +5,46 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMover : MonoBehaviour
 {
-    private CharacterController _controller;
-    private Vector3 _movement;
+    private CharacterController controller;
+    private Vector3 movement;
     public float gravity = -9.81f;
     public float moveSpeed = 3f;
     public float sprintModifier = 1.5f;
     public float jumpForce = 10f;
-    public int jumpCountMax;
-    public float rotateSpeed = 3f;
-    private Vector3 rotateMovement;
+    public bool canJump;
     
     private void Start()
     {
-        _controller = GetComponent<CharacterController>();
+        controller = GetComponent<CharacterController>();
     }
 
     private void Update()
     {
-        rotateMovement.y = rotateSpeed * Input.GetAxis("Horizontal");
-        transform.Rotate(rotateMovement);
+        Debug.Log(controller.isGrounded);
         
-        _movement.x = Input.GetAxis("Horizontal")*moveSpeed;
-        _movement.z = Input.GetAxis("Vertical")*moveSpeed;
+        movement.x = Input.GetAxis("Horizontal")*moveSpeed;
+        movement.z = Input.GetAxis("Vertical")*moveSpeed;
         
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && canJump)
         {
-            _movement.y = jumpForce;
+            if(!controller.isGrounded)
+            {
+                canJump = false;
+            }
+            movement.y = jumpForce;
+            
         }
 
-        if (_controller.isGrounded)
+        if (controller.isGrounded)
         {
-            _movement.y = 0;
+            //movement.y = 0;
+            canJump = true;
         }
         else
         {
-            _movement.y += gravity * Time.deltaTime;
+            movement.y += gravity * Time.deltaTime;
         }
 
-        _movement = transform.TransformDirection(_movement);
-        _controller.Move(_movement*Time.deltaTime);
+        controller.Move(movement*Time.deltaTime);
     }
 }
