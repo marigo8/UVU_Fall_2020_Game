@@ -7,56 +7,40 @@ public class CharacterMover : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 movement;
-    private Vector2 walkingMovement;
-    public float gravity = -9.81f;
-    public float moveSpeed = 3f;
-    public float sprintModifier = 1.5f;
-    public float jumpForce = 10f;
-    public bool canJump;
-    
+
+    public float moveSpeed = 5f, rotateSpeed = 30f, gravity = -9.81f, jumpForce = 30f;
+    private float yVar;
+
+    public int jumpCountMax = 2;
+    private int jumpCount;
     private void Start()
     {
         controller = GetComponent<CharacterController>();
     }
-
     
     private void Update()
     {
-        Walk();
-        JumpAndGravity();
-        controller.Move(movement*Time.deltaTime);
-    }
-    
-    private void Walk()
-    {
-        walkingMovement.x = Input.GetAxis("Horizontal");
-        walkingMovement.y = Input.GetAxis("Vertical");
-        walkingMovement = Vector2.ClampMagnitude(walkingMovement, 1f) * moveSpeed;
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            walkingMovement *= sprintModifier;
-        }
-        movement.x = walkingMovement.x;
-        movement.z = walkingMovement.y;
-    }
+        var vInput = Input.GetAxis("Vertical") * moveSpeed;
+        movement.Set(vInput, yVar, 0);
 
-    private void JumpAndGravity()
-    {
-        movement.y += gravity * Time.deltaTime;
-        if (Input.GetButtonDown("Jump") && canJump)
+        var hInput = Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime;
+        transform.Rotate(0,hInput,0);
+
+        yVar += gravity*Time.deltaTime;
+
+        if (controller.isGrounded && movement.y < 0)
         {
-            if(!controller.isGrounded)
-            {
-                canJump = false;
-            }
-            movement.y = jumpForce;
-            
+            yVar = -1f;
+            jumpCount = 0;
         }
-        else if (controller.isGrounded)
+
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpCountMax)
         {
-            movement.y = -1;
-            canJump = true;
-            
+            yVar = jumpForce;
+            jumpCount++;
         }
+
+        movement = transform.TransformDirection(movement * Time.deltaTime);
+        controller.Move(movement);
     }
 }
