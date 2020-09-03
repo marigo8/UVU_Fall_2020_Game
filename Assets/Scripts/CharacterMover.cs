@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMover : MonoBehaviour
@@ -8,7 +6,7 @@ public class CharacterMover : MonoBehaviour
     private CharacterController controller;
     private Vector3 movement;
 
-    public float moveSpeed = 5f, rotateSpeed = 30f, gravity = -9.81f, jumpForce = 30f;
+    public float moveSpeed = 5f, sprintModifier = 2f, rotateSpeed = 30f, gravity = -9.81f, jumpForce = 30f;
     private float yVar;
 
     public int jumpCountMax = 2;
@@ -20,7 +18,12 @@ public class CharacterMover : MonoBehaviour
     
     private void Update()
     {
+        print(controller.velocity.y);
         var vInput = Input.GetAxis("Vertical") * moveSpeed;
+        if (Input.GetButton("Sprint"))
+        {
+            vInput *= sprintModifier;
+        }
         movement.Set(vInput, yVar, 0);
 
         var hInput = Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime;
@@ -28,7 +31,7 @@ public class CharacterMover : MonoBehaviour
 
         yVar += gravity*Time.deltaTime;
 
-        if (controller.isGrounded && movement.y < 0)
+        if (controller.isGrounded && movement.y <= 0)
         {
             yVar = -1f;
             jumpCount = 0;
@@ -39,6 +42,8 @@ public class CharacterMover : MonoBehaviour
             yVar = jumpForce;
             jumpCount++;
         }
+
+        
 
         movement = transform.TransformDirection(movement * Time.deltaTime);
         controller.Move(movement);
