@@ -8,9 +8,9 @@ public class CharacterMover : MonoBehaviour
     
     private Vector3 movement;
 
-    [FormerlySerializedAs("useCarStyle")] public bool useVehicleStyle;
+    public bool useVehicleStyle;
 
-    public float moveSpeed = 5f, sprintModifier = 2f, rotateSpeed = 30f, gravity = -9.81f, jumpForce = 30f;
+    public float moveSpeed = 5f, sprintModifier = 2f, vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f;
     private float yVar;
 
     public int jumpCountMax = 2;
@@ -26,18 +26,12 @@ public class CharacterMover : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V))
         {
             useVehicleStyle = !useVehicleStyle;
-            transform.SetPositionAndRotation(transform.position, Quaternion.identity);
         }
         
         if (useVehicleStyle)
-        {
             MoveVehicleStyle();
-            movement = transform.TransformDirection(movement);
-        }
         else
-        {
             MoveNormalStyle();
-        }
 
         yVar += gravity * Time.deltaTime;
 
@@ -68,8 +62,9 @@ public class CharacterMover : MonoBehaviour
 
         movement.Set(0, yVar, vInput);
 
-        var hInput = Input.GetAxis("Horizontal") * rotateSpeed * Time.deltaTime;
+        var hInput = Input.GetAxis("Horizontal") * vehicleRotateSpeed * Time.deltaTime;
         transform.Rotate(0, hInput, 0);
+        movement = transform.TransformDirection(movement);
     }
 
     private void MoveNormalStyle()
@@ -78,6 +73,13 @@ public class CharacterMover : MonoBehaviour
         var vInput = Input.GetAxis("Vertical");
         movement.Set(hInput, 0, vInput);
         movement = Vector3.ClampMagnitude(movement, 1f) * moveSpeed;
+        
+        if (movement != Vector3.zero)
+        {
+            var rot = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(movement.normalized),characterRotateSpeed*Time.deltaTime);
+            transform.rotation = rot;
+        }
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             movement *= sprintModifier;
