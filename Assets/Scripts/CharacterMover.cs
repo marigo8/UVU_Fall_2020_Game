@@ -28,6 +28,12 @@ public class CharacterMover : MonoBehaviour
             useVehicleStyle = !useVehicleStyle;
         }
         
+        if (controller.isGrounded && movement.y <= 0)
+        {
+            yVar = 0f;
+            jumpCount = 0;
+        }
+        
         if (useVehicleStyle)
             MoveVehicleStyle();
         else
@@ -35,19 +41,15 @@ public class CharacterMover : MonoBehaviour
 
         yVar += gravity * Time.deltaTime;
 
-        if (controller.isGrounded && movement.y <= 0)
-        {
-            yVar = -1f;
-            jumpCount = 0;
-        }
+        
 
         if (Input.GetButtonDown("Jump") && jumpCount < jumpCountMax)
         {
             yVar = jumpForce;
             jumpCount++;
         }
-
-
+        
+        movement.y = yVar;
 
         controller.Move(movement * Time.deltaTime);
     }
@@ -60,7 +62,7 @@ public class CharacterMover : MonoBehaviour
             vInput *= sprintModifier;
         }
 
-        movement.Set(0, yVar, vInput);
+        movement.Set(0, 0, vInput);
 
         var hInput = Input.GetAxis("Horizontal") * vehicleRotateSpeed * Time.deltaTime;
         transform.Rotate(0, hInput, 0);
@@ -84,7 +86,6 @@ public class CharacterMover : MonoBehaviour
         {
             movement *= sprintModifier;
         }
-        movement.y = yVar;
     }
 
 }
