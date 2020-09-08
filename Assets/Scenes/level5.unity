@@ -681,7 +681,7 @@ MonoBehaviour:
   vehicleRotateSpeed: 120
   characterRotateSpeed: 20
   gravity: -9.81
-  jumpForce: 5
+  jumpForce: 6
   jumpCountMax: 2
 --- !u!143 &1596457626
 CharacterController:

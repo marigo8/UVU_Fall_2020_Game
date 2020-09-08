@@ -9,6 +9,7 @@ public class CharacterMover : MonoBehaviour
     private Vector3 movement;
 
     public bool useVehicleStyle;
+    private bool leavingGround = false;
 
     public float moveSpeed = 5f, sprintModifier = 2f, vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f;
     private float yVar;
@@ -28,10 +29,21 @@ public class CharacterMover : MonoBehaviour
             useVehicleStyle = !useVehicleStyle;
         }
         
-        if (controller.isGrounded && movement.y <= 0)
+        if (controller.isGrounded && yVar <= 0)
         {
-            yVar = 0f;
+            //yVar = -1f;
             jumpCount = 0;
+            leavingGround = true;
+        }
+        else
+        {
+            if(leavingGround){
+                leavingGround = false;
+                if (yVar < 0)
+                {
+                    yVar = 0;
+                }
+            }
         }
         
         if (useVehicleStyle)
