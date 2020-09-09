@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(CharacterController))]
@@ -11,10 +12,15 @@ public class CharacterMover : MonoBehaviour
     public bool useVehicleStyle;
     private bool leavingGround = false;
 
-    public float moveSpeed = 5f, sprintModifier = 2f, vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f;
+    public float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f;
     private float yVar;
 
-    public int jumpCountMax = 2;
+    public FloatData moveSpeed, sprintModifier;
+
+    public IntData playerJumpCount;
+
+    public Vector3Data currentSpawnPoint;
+
     private int jumpCount;
 
     private void Start()
@@ -55,7 +61,7 @@ public class CharacterMover : MonoBehaviour
 
         
 
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpCountMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < playerJumpCount.value)
         {
             yVar = jumpForce;
             jumpCount++;
@@ -68,10 +74,10 @@ public class CharacterMover : MonoBehaviour
 
     private void MoveVehicleStyle()
     {
-        var vInput = Input.GetAxis("Vertical") * moveSpeed;
+        var vInput = Input.GetAxis("Vertical") * moveSpeed.value;
         if (Input.GetButton("Sprint"))
         {
-            vInput *= sprintModifier;
+            vInput *= sprintModifier.value;
         }
 
         movement.Set(0, 0, vInput);
@@ -86,7 +92,7 @@ public class CharacterMover : MonoBehaviour
         var hInput = Input.GetAxis("Horizontal");
         var vInput = Input.GetAxis("Vertical");
         movement.Set(hInput, 0, vInput);
-        movement = Vector3.ClampMagnitude(movement, 1f) * moveSpeed;
+        movement = Vector3.ClampMagnitude(movement, 1f) * moveSpeed.value;
         
         if (movement != Vector3.zero)
         {
@@ -94,10 +100,15 @@ public class CharacterMover : MonoBehaviour
             transform.rotation = rot;
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetButton("Sprint"))
         {
-            movement *= sprintModifier;
+            movement *= sprintModifier.value;
         }
     }
 
+    
+    private void OnEnable()
+    {
+        // Set the position of the player to the location data of the player.
+    }
 }
