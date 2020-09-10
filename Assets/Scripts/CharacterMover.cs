@@ -26,6 +26,7 @@ public class CharacterMover : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        currentSpawnPoint.value = transform.position;
     }
 
     private void Update()
