@@ -41,6 +41,8 @@ public class CharacterMover : MonoBehaviour
         controller = GetComponent<CharacterController>();
         meshRenderer = GetComponent<MeshRenderer>();
         
+        meshRenderer.material.shaderKeywords = new[] {"_EMISSION"};
+        
         currentSpawnPoint.value = transform.position;
         defaultSpawnPointSet = true;
 
