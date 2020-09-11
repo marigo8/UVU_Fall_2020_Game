@@ -1,41 +1,85 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMover : MonoBehaviour
 {
     private CharacterController controller;
-    
-    private Vector3 movement;
+
+    public Text healthText;
+
+    private string healthLabel;
 
     public bool useVehicleStyle;
-    private bool leavingGround = false;
+    private bool leavingGround = false, defaultSpawnPointSet = false;
 
     public float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f;
     private float yVar;
 
+    private int jumpCount;
+    
+    private Vector3 movement;
+    
     public FloatData moveSpeed, sprintModifier;
 
-    public IntData playerJumpCount;
+    public IntData playerJumpCount, playerHealth, playerMaxHealth;
 
     public Vector3Data currentSpawnPoint;
-
-    private int jumpCount;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        
         currentSpawnPoint.value = transform.position;
+        defaultSpawnPointSet = true;
+
+        playerHealth.value = playerMaxHealth.value;
+
+        healthLabel = healthText.text;
     }
 
     private void Update()
     {
+        print(controller.velocity.y);
+        Movement();
+        UpdateUI();
+    }
+    
+    private void OnEnable()
+    {
+        if (defaultSpawnPointSet)
+        {
+            transform.position = currentSpawnPoint.value;
+        }
+    }
+    
+    private void Movement()
+    {
+        GroundCheck();
+
         if (Input.GetKeyDown(KeyCode.V))
         {
             useVehicleStyle = !useVehicleStyle;
         }
+
+        if (useVehicleStyle)
+            MoveVehicleStyle();
+        else
+            MoveNormalStyle();
+
+        yVar += gravity * Time.deltaTime;
+
+        Jump();
         
+        movement.y = yVar;
+
+        controller.Move(movement * Time.deltaTime);
+    }
+    
+    private void GroundCheck()
+    {
         if (controller.isGrounded && yVar <= 0)
         {
             //yVar = -1f;
@@ -52,25 +96,6 @@ public class CharacterMover : MonoBehaviour
                 }
             }
         }
-        
-        if (useVehicleStyle)
-            MoveVehicleStyle();
-        else
-            MoveNormalStyle();
-
-        yVar += gravity * Time.deltaTime;
-
-        
-
-        if (Input.GetButtonDown("Jump") && jumpCount < playerJumpCount.value)
-        {
-            yVar = jumpForce;
-            jumpCount++;
-        }
-        
-        movement.y = yVar;
-
-        controller.Move(movement * Time.deltaTime);
     }
 
     private void MoveVehicleStyle()
@@ -107,9 +132,18 @@ public class CharacterMover : MonoBehaviour
         }
     }
 
-    
-    private void OnEnable()
+    private void Jump()
     {
-        // Set the position of the player to the location data of the player.
+        if (Input.GetButtonDown("Jump") && jumpCount < playerJumpCount.value)
+        {
+            yVar = jumpForce;
+            jumpCount++;
+        }
     }
+
+    private void UpdateUI()
+    {
+        healthText.text = healthLabel + playerHealth.value;
+    }
+    
 }
