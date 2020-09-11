@@ -1587,6 +1587,7 @@ MonoBehaviour:
   characterRotateSpeed: 20
   gravity: -19.62
   jumpForce: 9
+  invincibleTime: 0.5
   moveSpeed: {fileID: 11400000, guid: 88045f42521cbc1448ffdd3af02e9d47, type: 2}
   sprintModifier: {fileID: 11400000, guid: fa8e9d3697f48ea499a9efc71cd46ccc, type: 2}
   playerJumpCount: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
