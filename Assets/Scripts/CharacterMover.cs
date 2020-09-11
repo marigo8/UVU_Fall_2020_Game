@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ using UnityEngine.UI;
 public class CharacterMover : MonoBehaviour
 {
     private CharacterController controller;
+    private MeshRenderer meshRenderer;
 
     public Text healthText;
 
@@ -28,9 +30,16 @@ public class CharacterMover : MonoBehaviour
 
     public Vector3Data currentSpawnPoint;
 
+    public void TakeDamage(int damage)
+    {
+        playerHealth.value -= damage;
+        StartCoroutine(nameof(FlashRed));
+    }
+    
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        meshRenderer = GetComponent<MeshRenderer>();
         
         currentSpawnPoint.value = transform.position;
         defaultSpawnPointSet = true;
@@ -42,7 +51,6 @@ public class CharacterMover : MonoBehaviour
 
     private void Update()
     {
-        print(controller.velocity.y);
         Movement();
         UpdateUI();
     }
@@ -144,6 +152,15 @@ public class CharacterMover : MonoBehaviour
     private void UpdateUI()
     {
         healthText.text = healthLabel + playerHealth.value;
+    }
+
+    private IEnumerator FlashRed()
+    {
+        print("red");
+        meshRenderer.material.SetColor("_EmissionColor",Color.red * Mathf.LinearToGammaSpace(10f));
+        yield return new WaitForSeconds(.5f);
+        print("black");
+        meshRenderer.material.SetColor("_EmissionColor",Color.black * Mathf.LinearToGammaSpace(10f));
     }
     
 }
