@@ -15,9 +15,9 @@ public class CharacterMover : MonoBehaviour
     private string healthLabel;
 
     public bool useVehicleStyle;
-    private bool leavingGround = false, defaultSpawnPointSet = false;
+    private bool leavingGround = false, defaultSpawnPointSet = false, invincible = false;
 
-    public float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f;
+    public float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f, invincibleTime;
     private float yVar;
 
     private int jumpCount;
@@ -32,6 +32,7 @@ public class CharacterMover : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (invincible) return;
         playerHealth.value -= damage;
         StartCoroutine(nameof(FlashRed));
     }
@@ -158,11 +159,13 @@ public class CharacterMover : MonoBehaviour
 
     private IEnumerator FlashRed()
     {
-        print("red");
+        invincible = true;
         meshRenderer.material.SetColor("_EmissionColor",Color.red * Mathf.LinearToGammaSpace(10f));
-        yield return new WaitForSeconds(.5f);
-        print("black");
+        
+        yield return new WaitForSeconds(invincibleTime);
+        
         meshRenderer.material.SetColor("_EmissionColor",Color.black * Mathf.LinearToGammaSpace(10f));
+        invincible = false;
     }
     
 }
