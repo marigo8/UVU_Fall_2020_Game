@@ -15,12 +15,13 @@ public class CharacterMover : MonoBehaviour
     private string healthLabel;
 
     public bool useVehicleStyle;
-    private bool leavingGround = false, defaultSpawnPointSet = false, invincible = false;
+    private bool leavingGround = false, invincible = false, dead = false;
 
-    public float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f, invincibleTime;
+    public float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f, invincibleTime, spawnTime = 3f;
     private float yVar;
 
     private int jumpCount;
+    private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
     
     private Vector3 movement;
     
@@ -36,6 +37,18 @@ public class CharacterMover : MonoBehaviour
         playerHealth.value -= damage;
         StartCoroutine(nameof(FlashRed));
     }
+
+    private void Die()
+    {
+        if (dead) return;
+        dead = true;
+        
+        controller.enabled = false;
+        meshRenderer.enabled = false;
+        transform.GetChild(0).gameObject.SetActive(false);
+
+        StartCoroutine(nameof(Respawn));
+    }
     
     private void Start()
     {
@@ -45,7 +58,6 @@ public class CharacterMover : MonoBehaviour
         meshRenderer.material.shaderKeywords = new[] {"_EMISSION"};
         
         currentSpawnPoint.value = transform.position;
-        defaultSpawnPointSet = true;
 
         playerHealth.value = playerMaxHealth.value;
 
@@ -54,16 +66,20 @@ public class CharacterMover : MonoBehaviour
 
     private void Update()
     {
-        Movement();
-        UpdateUI();
+        if (!dead)
+        {
+            CheckHealth();
+            Movement();
+        }
     }
     
-    private void OnEnable()
+    private void CheckHealth()
     {
-        if (defaultSpawnPointSet)
-        {
-            transform.position = currentSpawnPoint.value;
-        }
+        healthText.text = healthLabel + playerHealth.value;
+        
+        if (playerHealth.value > 0) return;
+
+        Die();
     }
     
     private void Movement()
@@ -152,19 +168,28 @@ public class CharacterMover : MonoBehaviour
         }
     }
 
-    private void UpdateUI()
+    private IEnumerator Respawn()
     {
-        healthText.text = healthLabel + playerHealth.value;
+        yield return new WaitForSeconds(spawnTime);
+        
+        transform.position = currentSpawnPoint.value;
+        playerHealth.value = playerMaxHealth.value;
+        
+        controller.enabled = true;
+        meshRenderer.enabled = true;
+        transform.GetChild(0).gameObject.SetActive(true);
+        
+        dead = false;
     }
 
     private IEnumerator FlashRed()
     {
         invincible = true;
-        meshRenderer.material.SetColor("_EmissionColor",Color.red * Mathf.LinearToGammaSpace(10f));
+        meshRenderer.material.SetColor(EmissionColor,Color.red * Mathf.LinearToGammaSpace(10f));
         
         yield return new WaitForSeconds(invincibleTime);
         
-        meshRenderer.material.SetColor("_EmissionColor",Color.black * Mathf.LinearToGammaSpace(10f));
+        meshRenderer.material.SetColor(EmissionColor,Color.black * Mathf.LinearToGammaSpace(10f));
         invincible = false;
     }
     
