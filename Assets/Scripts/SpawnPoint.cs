@@ -10,7 +10,7 @@ public class SpawnPoint : MonoBehaviour
     // Set the vData from the position value on start
     private void Start()
     {
-        vData.value = transform.position;
+        vData.SetValue(transform.position);
     }
 
     private void OnTriggerEnter(Collider other)

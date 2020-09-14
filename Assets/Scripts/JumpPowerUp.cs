@@ -13,6 +13,8 @@ public class JumpPowerUp : MonoBehaviour
 
     private IEnumerator OnTriggerEnter(Collider other)
     {
+        if (other.GetComponent<CharacterMover>() == null) yield break;
+        
         playerJumpCount.value = powerUpCount.value;
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
