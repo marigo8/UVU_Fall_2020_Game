@@ -29,7 +29,7 @@ public class CharacterMover : MonoBehaviour
 
     public IntData playerJumpCount, playerHealth, playerMaxHealth;
 
-    public Vector3Data currentSpawnPoint;
+    public TransformData currentSpawnPoint;
 
     public void TakeDamage(int damage)
     {
@@ -57,7 +57,7 @@ public class CharacterMover : MonoBehaviour
         
         meshRenderer.material.shaderKeywords = new[] {"_EMISSION"};
         
-        currentSpawnPoint.value = transform.position;
+        currentSpawnPoint.SetTransform(transform);
 
         playerHealth.value = playerMaxHealth.value;
 
@@ -172,7 +172,8 @@ public class CharacterMover : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnTime);
         
-        transform.position = currentSpawnPoint.value;
+        transform.position = currentSpawnPoint.position;
+        transform.rotation = currentSpawnPoint.GetRotation();
         playerHealth.value = playerMaxHealth.value;
         
         controller.enabled = true;
