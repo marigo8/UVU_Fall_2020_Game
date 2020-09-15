@@ -38,18 +38,6 @@ public class CharacterMover : MonoBehaviour
         StartCoroutine(nameof(FlashRed));
     }
 
-    private void Die()
-    {
-        if (dead) return;
-        dead = true;
-        
-        controller.enabled = false;
-        meshRenderer.enabled = false;
-        transform.GetChild(0).gameObject.SetActive(false);
-
-        StartCoroutine(nameof(Respawn));
-    }
-    
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -167,6 +155,21 @@ public class CharacterMover : MonoBehaviour
             jumpCount++;
         }
     }
+    
+    private void Die()
+    {
+        if (dead) return;
+        dead = true;
+        
+        controller.enabled = false;
+        meshRenderer.enabled = false;
+        for (var i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        StartCoroutine(nameof(Respawn));
+    }
 
     private IEnumerator Respawn()
     {
@@ -178,7 +181,11 @@ public class CharacterMover : MonoBehaviour
         
         controller.enabled = true;
         meshRenderer.enabled = true;
-        transform.GetChild(0).gameObject.SetActive(true);
+        
+        for (var i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(true);
+        }
         
         dead = false;
     }
