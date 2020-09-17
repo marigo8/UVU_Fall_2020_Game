@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class LookAt : MonoBehaviour
 {
-    public Transform lookAtObj;
+    public Transform target;
     private void Update()
     {
-        var lookAt = Vector3.zero;
+        transform.LookAt(target);
         var rot = transform.eulerAngles;
         rot.x = 0;
         transform.rotation = Quaternion.Euler(rot);

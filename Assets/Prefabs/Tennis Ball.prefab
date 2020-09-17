@@ -125,4 +125,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0819950260df0c74d9e5518d4c077f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 1000
+  force: {x: 0, y: 100, z: 1000}

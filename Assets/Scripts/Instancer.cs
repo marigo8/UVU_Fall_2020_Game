@@ -8,12 +8,32 @@ public class Instancer : MonoBehaviour
 
     private Vector3 location;
     private Quaternion rotation;
+    
+    private Camera cam;
+    public Transform target;
+
+    private void Start()
+    {
+        cam = Camera.main;
+    }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        //  v Use this to detect mouse input instead
+        if (Input.GetMouseButtonDown(0))
         {
-            InstantiatePrefab();
+            var ray = cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hit))
+            {
+                target.position = hit.point;
+
+                transform.LookAt(target);
+                var rot = transform.eulerAngles;
+                rot.x = 0;
+                transform.rotation = Quaternion.Euler(rot);
+                
+                InstantiatePrefab();
+            }
         }
     }
     
@@ -26,7 +46,7 @@ public class Instancer : MonoBehaviour
         var direction = location - transform.position;
         direction = rotation * direction;
         location = direction + transform.position;
-        
+
         Instantiate(prefab,location,rotation);
     }
 

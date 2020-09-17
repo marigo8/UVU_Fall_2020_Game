@@ -7,12 +7,12 @@ using UnityEngine;
 public class ApplyForce : MonoBehaviour
 {
     private Rigidbody rb;
-    public float force = 300f;
+    public Vector3 force;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        var forceDirection = new Vector3(0, 0, force);
+        var forceDirection = force;
         rb.AddRelativeForce(forceDirection);
     }
 }
