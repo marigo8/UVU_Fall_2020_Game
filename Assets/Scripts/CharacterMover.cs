@@ -10,27 +10,31 @@ public class CharacterMover : MonoBehaviour
     private CharacterController controller;
     private MeshRenderer meshRenderer;
 
-    public Text healthText;
-
+    [Header("UI")]
+    [SerializeField] private Text healthText;
     private string healthLabel;
 
-    public bool useVehicleStyle;
-    private bool leavingGround = false, invincible = false, dead = false;
+    [Header("Movement")]
+    [SerializeField] private bool useVehicleStyle;
+    [SerializeField] private float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f;
+    [SerializeField] private FloatData moveSpeed, sprintModifier;
+    private Vector3 movement;
 
-    public float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f, gravity = -9.81f, jumpForce = 30f, invincibleTime, spawnTime = 3f;
+    [Header("Jump and Gravity")]
+    [SerializeField] private float gravity = -9.81f, jumpForce = 30f;
+    [SerializeField] private IntData playerJumpCount;
+    private bool leavingGround = false;
     private float yVar;
-
     private int jumpCount;
+    
+    [Header("Health and Respawn")]
+    public IntData playerHealth;
+    public TransformData currentSpawnPoint;
+    [SerializeField] private float invincibleTime, spawnTime = 3f;
+    [SerializeField] private IntData playerMaxHealth;
+    private bool invincible = false, dead = false;
     private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
     
-    private Vector3 movement;
-    
-    public FloatData moveSpeed, sprintModifier;
-
-    public IntData playerJumpCount, playerHealth, playerMaxHealth;
-
-    public TransformData currentSpawnPoint;
-
     public void TakeDamage(int damage)
     {
         if (invincible) return;
