@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMover : MonoBehaviour
@@ -20,12 +23,16 @@ public class CharacterMover : MonoBehaviour
     [SerializeField] private FloatData moveSpeed, sprintModifier;
     private Vector3 movement;
 
-    [Header("Jump and Gravity")]
-    [SerializeField] private float gravity = -9.81f, jumpForce = 30f;
+    [Header("Jump")]
+    [SerializeField] private float jumpForce = 30f;
     [SerializeField] private IntData playerJumpCount;
-    private bool leavingGround = false;
     private float yVar;
     private int jumpCount;
+
+    [Header("Physics")] 
+    [SerializeField] private float gravity = -9.81f;
+    private Vector3 addedForce;
+    private bool leavingGround = false;
     
     [Header("Health and Respawn")]
     public IntData playerHealth;
@@ -35,8 +42,9 @@ public class CharacterMover : MonoBehaviour
     private bool invincible = false, dead = false;
     private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
     
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector3 force)
     {
+        addedForce = force;
         if (invincible) return;
         playerHealth.value -= damage;
         StartCoroutine(nameof(FlashRed));
@@ -88,11 +96,12 @@ public class CharacterMover : MonoBehaviour
         else
             MoveNormalStyle();
 
-        yVar += gravity * Time.deltaTime;
 
         Jump();
         
         movement.y = yVar;
+        
+        AdditionalForce();
 
         controller.Move(movement * Time.deltaTime);
     }
@@ -114,6 +123,7 @@ public class CharacterMover : MonoBehaviour
                     yVar = 0;
                 }
             }
+            yVar += gravity * Time.deltaTime;
         }
     }
 
@@ -159,11 +169,27 @@ public class CharacterMover : MonoBehaviour
             jumpCount++;
         }
     }
+
+    private void AdditionalForce()
+    {
+        addedForce = Vector3.Lerp(addedForce, Vector3.zero, 5 * Time.deltaTime);
+        if (addedForce.magnitude <0.01f)
+        {
+            addedForce = Vector3.zero;
+        }
+
+        if (addedForce.magnitude > 0)
+        {
+            movement += addedForce;
+        }
+    }
     
     private void Die()
     {
         if (dead) return;
         dead = true;
+
+        addedForce = Vector3.zero;
         
         controller.enabled = false;
         meshRenderer.enabled = false;

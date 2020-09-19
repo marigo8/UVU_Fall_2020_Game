@@ -1566,9 +1566,9 @@ MonoBehaviour:
   characterRotateSpeed: 20
   moveSpeed: {fileID: 11400000, guid: 88045f42521cbc1448ffdd3af02e9d47, type: 2}
   sprintModifier: {fileID: 11400000, guid: fa8e9d3697f48ea499a9efc71cd46ccc, type: 2}
-  gravity: -19.62
   jumpForce: 9
   playerJumpCount: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
+  gravity: -19.62
   playerHealth: {fileID: 11400000, guid: ccd5b5064a6bd174cb503172152249cc, type: 2}
   currentSpawnPoint: {fileID: 11400000, guid: f08cc56aef7d7044f9a9123ea9c1990a, type: 2}
   invincibleTime: 0.75
@@ -1808,6 +1808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: {fileID: 11400000, guid: 5261903538d71e944860ad28075c9863, type: 2}
+  knockBackForce: 10
 --- !u!65 &1718246700
 BoxCollider:
   m_ObjectHideFlags: 0
