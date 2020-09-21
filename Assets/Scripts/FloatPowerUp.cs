@@ -16,14 +16,14 @@ public class FloatPowerUp : MonoBehaviour
     {
         if (other.GetComponent<CharacterMover>() == null) yield break;
         
-        playerFloatData.value = newFloatData.value;
+        playerFloatData.value += newFloatData.value;
         
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
         
         yield return new WaitForSeconds(buffTime);
         
-        playerFloatData.value = defaultFloatData.value;
+        playerFloatData.value -= newFloatData.value;
         
         if (respawn)
         {

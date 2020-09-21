@@ -16,14 +16,14 @@ public class IntPowerUp : MonoBehaviour
     {
         if (other.GetComponent<CharacterMover>() == null) yield break;
         
-        playerIntData.value = newIntData.value;
+        playerIntData.value += newIntData.value;
         
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
         
         yield return new WaitForSeconds(buffTime);
         
-        playerIntData.value = defaultIntData.value;
+        playerIntData.value -= defaultIntData.value;
         
         if (respawn)
         {
