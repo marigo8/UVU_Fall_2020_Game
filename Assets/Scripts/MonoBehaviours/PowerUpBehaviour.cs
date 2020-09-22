@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-public class PowerUp : MonoBehaviour
+public class PowerUpBehaviour : MonoBehaviour
 {
     public float respawnTime;
     public UnityEvent powerUpAction;
 
     private IEnumerator OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<PlayerController>() == null) yield break;
+        if (other.GetComponent<PlayerBehaviour>() == null) yield break;
         
         powerUpAction.Invoke();
 

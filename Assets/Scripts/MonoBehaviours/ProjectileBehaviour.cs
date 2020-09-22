@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ApplyForce : MonoBehaviour
+public class ProjectileBehaviour : MonoBehaviour
 {
     private Rigidbody rb;
     public Vector3 force;

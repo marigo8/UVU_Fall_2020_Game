@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Instancer : MonoBehaviour
+public class FirePointBehaviour : MonoBehaviour
 {
     public GameObject prefab;
     public Vector3 offset;

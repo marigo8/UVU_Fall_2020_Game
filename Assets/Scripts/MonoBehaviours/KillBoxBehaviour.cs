@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillPlayer : MonoBehaviour
+public class KillBoxBehaviour : MonoBehaviour
 {
     private void OnTriggerStay(Collider other)
     {
-        var cm = other.GetComponent<PlayerController>();
+        var cm = other.GetComponent<PlayerBehaviour>();
         if (cm != null)
         {
             cm.playerHealth.value = 0;

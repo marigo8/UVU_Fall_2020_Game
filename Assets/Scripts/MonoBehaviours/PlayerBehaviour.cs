@@ -8,7 +8,7 @@ using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour
 {
     private CharacterController controller;
     private MeshRenderer meshRenderer;

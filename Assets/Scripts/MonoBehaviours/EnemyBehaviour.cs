@@ -3,13 +3,13 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Collider))]
-public class DamagePlayer : MonoBehaviour
+public class EnemyBehaviour : MonoBehaviour
 {
     [SerializeField] private IntData damage;
     [SerializeField] private float knockBackForce;
     private void OnTriggerStay(Collider other)
     {
-        var cm = other.GetComponent<PlayerController>();
+        var cm = other.GetComponent<PlayerBehaviour>();
         if (cm == null) return;
         
         var force = other.transform.position - transform.position;
