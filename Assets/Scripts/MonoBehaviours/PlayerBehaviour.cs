@@ -18,9 +18,9 @@ public class PlayerBehaviour : MonoBehaviour
     private string healthLabel;
 
     [Header("Movement")]
-    [SerializeField] private bool useVehicleStyle;
     [SerializeField] private float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f;
     [SerializeField] private FloatData moveSpeed, sprintModifier;
+    private bool useVehicleStyle, playerCanMove;
     private Vector3 movement;
     private float moveSpeedModifier = 1f;
 
@@ -48,11 +48,12 @@ public class PlayerBehaviour : MonoBehaviour
         addedForce = force;
         if (invincible) return;
         playerHealth.value -= damage;
-        StartCoroutine(nameof(FlashRed));
+        StartCoroutine(nameof(Invincibility));
     }
 
     private void Start()
     {
+        playerCanMove = true;
         controller = GetComponent<CharacterController>();
         meshRenderer = GetComponent<MeshRenderer>();
         
@@ -92,15 +93,18 @@ public class PlayerBehaviour : MonoBehaviour
             useVehicleStyle = !useVehicleStyle;
         }
 
-        if (useVehicleStyle)
-            MoveVehicleStyle();
-        else
-            MoveNormalStyle();
+        if (playerCanMove)
+        {
+            if (useVehicleStyle)
+                MoveVehicleStyle();
+            else
+                MoveNormalStyle();
 
-        movement *= moveSpeedModifier;
+            movement *= moveSpeedModifier;
 
-        Jump();
-        
+            Jump();
+        }
+
         movement.y = yVar;
         
         AdditionalForce();
@@ -222,7 +226,7 @@ public class PlayerBehaviour : MonoBehaviour
         dead = false;
     }
 
-    private IEnumerator FlashRed()
+    private IEnumerator Invincibility()
     {
         invincible = true;
         meshRenderer.material.SetColor(EmissionColor,Color.red * Mathf.LinearToGammaSpace(10f));
