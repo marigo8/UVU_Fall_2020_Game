@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932e25920ee1c6540bb6118db6b6f1ab, type: 3}
   m_Name: SpeedPowerUpData
   m_EditorClassIdentifier: 
-  isInt: 0
-  respawns: 1
   intValue: 0
-  floatValue: 9
-  powerUpTime: 5
+  floatValue: 0.5
+  time: 5

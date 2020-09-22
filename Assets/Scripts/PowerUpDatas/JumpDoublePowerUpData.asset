@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 932e25920ee1c6540bb6118db6b6f1ab, type: 3}
-  m_Name: DoubleJumpPowerUpData
+  m_Name: JumpDoublePowerUpData
   m_EditorClassIdentifier: 
-  isInt: 1
-  respawns: 1
-  intValue: 2
+  intValue: 1
   floatValue: 0
-  powerUpTime: 5
+  time: 5

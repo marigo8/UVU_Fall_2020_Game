@@ -540,15 +540,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 751014961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b25d3d44dc68e941896df07fe9e4b5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 18e801ee6a2bf334191b9305b7d15336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFloatData: {fileID: 11400000, guid: 88045f42521cbc1448ffdd3af02e9d47, type: 2}
-  defaultFloatData: {fileID: 11400000, guid: 9e928b33964eedf479a663ab94fceaac, type: 2}
-  newFloatData: {fileID: 11400000, guid: f0a6bfea890c8e74ba19bb6b6db14c54, type: 2}
-  buffTime: 5
-  respawnTime: 5
-  respawn: 1
+  respawnTime: 10
+  powerUpAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1596457625}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: IncreaseMoveSpeed
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 68903fe3b0951914793bed8c1abef89f, type: 2}
+          m_ObjectArgumentAssemblyTypeName: PowerUpData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &751014963
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -844,15 +854,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 814165660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4451c34a53ed184449c4658d7f12e0ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 18e801ee6a2bf334191b9305b7d15336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIntData: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
-  defaultIntData: {fileID: 11400000, guid: b0a360bc253bf6d449ac84e7ab9aa82a, type: 2}
-  newIntData: {fileID: 11400000, guid: ee5ef28208bcc964685135ba617b60e6, type: 2}
-  buffTime: 5
-  respawnTime: 5
-  respawn: 1
+  respawnTime: 10
+  powerUpAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1596457625}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: IncreaseJumpCount
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 52e3ff4a089e0c04a875c50100e6f9ce, type: 2}
+          m_ObjectArgumentAssemblyTypeName: PowerUpData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &814165662
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2191,15 +2211,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1860536510}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4451c34a53ed184449c4658d7f12e0ab, type: 3}
+  m_Script: {fileID: 11500000, guid: 18e801ee6a2bf334191b9305b7d15336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIntData: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
-  defaultIntData: {fileID: 11400000, guid: b0a360bc253bf6d449ac84e7ab9aa82a, type: 2}
-  newIntData: {fileID: 11400000, guid: f04437efcbf47a24eabbc923585766ff, type: 2}
-  buffTime: 5
-  respawnTime: 5
-  respawn: 1
+  respawnTime: 10
+  powerUpAction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1596457625}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: IncreaseJumpCount
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: bd15d4b12d847d842904f841dcfd6a77, type: 2}
+          m_ObjectArgumentAssemblyTypeName: PowerUpData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &1860536512
 SphereCollider:
   m_ObjectHideFlags: 0
