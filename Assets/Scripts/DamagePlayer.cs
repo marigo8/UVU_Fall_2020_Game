@@ -9,7 +9,7 @@ public class DamagePlayer : MonoBehaviour
     [SerializeField] private float knockBackForce;
     private void OnTriggerStay(Collider other)
     {
-        var cm = other.GetComponent<CharacterMover>();
+        var cm = other.GetComponent<PlayerController>();
         if (cm == null) return;
         
         var force = other.transform.position - transform.position;

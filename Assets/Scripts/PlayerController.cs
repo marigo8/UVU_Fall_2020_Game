@@ -8,7 +8,7 @@ using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
 [RequireComponent(typeof(CharacterController))]
-public class CharacterMover : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
     private MeshRenderer meshRenderer;
@@ -22,12 +22,13 @@ public class CharacterMover : MonoBehaviour
     [SerializeField] private float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f;
     [SerializeField] private FloatData moveSpeed, sprintModifier;
     private Vector3 movement;
+    private float moveSpeedModifier = 1f;
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 30f;
     [SerializeField] private IntData playerJumpCount;
-    private float yVar;
-    private int jumpCount;
+    private float yVar, jumpCountPowerUpTime;
+    private int jumpCount, jumpCountModifier;
 
     [Header("Physics")] 
     [SerializeField] private float gravity = -9.81f;
@@ -72,7 +73,7 @@ public class CharacterMover : MonoBehaviour
             Movement();
         }
     }
-    
+
     private void CheckHealth()
     {
         healthText.text = healthLabel + playerHealth.value;
@@ -96,6 +97,7 @@ public class CharacterMover : MonoBehaviour
         else
             MoveNormalStyle();
 
+        movement *= moveSpeedModifier;
 
         Jump();
         
@@ -163,7 +165,7 @@ public class CharacterMover : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount < playerJumpCount.value)
+        if (Input.GetButtonDown("Jump") && jumpCount < playerJumpCount.value+jumpCountModifier)
         {
             yVar = jumpForce;
             jumpCount++;
@@ -208,7 +210,7 @@ public class CharacterMover : MonoBehaviour
         transform.position = currentSpawnPoint.position;
         transform.rotation = currentSpawnPoint.GetRotation();
         playerHealth.value = playerMaxHealth.value;
-        
+
         controller.enabled = true;
         meshRenderer.enabled = true;
         
@@ -230,5 +232,26 @@ public class CharacterMover : MonoBehaviour
         meshRenderer.material.SetColor(EmissionColor,Color.black * Mathf.LinearToGammaSpace(10f));
         invincible = false;
     }
+
+    public void IncreaseJumpCount(PowerUpData powerUpData)
+    {
+        jumpCountModifier += powerUpData.intValue;
+        StartCoroutine(DecreaseJumpCount(powerUpData));
+    }
+    private IEnumerator DecreaseJumpCount(PowerUpData powerUpData)
+    {
+        yield return new WaitForSeconds(powerUpData.time);
+        jumpCountModifier -= powerUpData.intValue;
+    }
     
+    public void IncreaseMoveSpeed(PowerUpData powerUpData)
+    {
+        moveSpeedModifier += powerUpData.floatValue;
+        StartCoroutine(DecreaseMoveSpeed(powerUpData));
+    }
+    private IEnumerator DecreaseMoveSpeed(PowerUpData powerUpData)
+    {
+        yield return new WaitForSeconds(powerUpData.time);
+        moveSpeedModifier -= powerUpData.floatValue;
+    }
 }

@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb7707b2c5b79a448ebb37dc6a34be6, type: 3}
-  m_Name: PlayerJumpCount
+  m_Script: {fileID: 11500000, guid: 932e25920ee1c6540bb6118db6b6f1ab, type: 3}
+  m_Name: TripleJumpPowerUpData
   m_EditorClassIdentifier: 
-  value: 1
+  isInt: 1
+  respawns: 1
+  intValue: 3
+  floatValue: 0
+  powerUpTime: 2
