@@ -1675,6 +1675,7 @@ GameObject:
   - component: {fileID: 1539236995}
   - component: {fileID: 1539236994}
   - component: {fileID: 1539236993}
+  - component: {fileID: 1539236997}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -1759,6 +1760,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1539236997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539236992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2991ac6166899f242b57c38bdf6e7899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseDownEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e3bd42caa5e7f2440be3ae4eb2ac938f, type: 2}
+        m_TargetAssemblyTypeName: Debugger, Assembly-CSharp
+        m_MethodName: OnDebug
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Click Ground
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1596457624
 GameObject:
   m_ObjectHideFlags: 0
