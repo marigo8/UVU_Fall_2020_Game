@@ -11,6 +11,15 @@ public class KillBoxBehaviour : MonoBehaviour
         {
             cm.playerHealth.value = 0;
         }
-        
+        else
+        {
+            var rb = other.GetComponent<Rigidbody>();
+            {
+                if (rb != null)
+                {
+                    Destroy(other.gameObject);
+                }
+            }
+        }
     }
 }
