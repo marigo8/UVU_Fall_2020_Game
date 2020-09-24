@@ -1800,6 +1800,7 @@ GameObject:
   - component: {fileID: 1596457627}
   - component: {fileID: 1596457625}
   - component: {fileID: 1596457626}
+  - component: {fileID: 1596457630}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1827,11 +1828,8 @@ MonoBehaviour:
   jumpForce: 9
   playerJumpCount: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
   gravity: -19.62
-  playerHealth: {fileID: 11400000, guid: ccd5b5064a6bd174cb503172152249cc, type: 2}
   currentSpawnPoint: {fileID: 11400000, guid: f08cc56aef7d7044f9a9123ea9c1990a, type: 2}
-  invincibleTime: 0.75
   spawnTime: 3
-  playerMaxHealth: {fileID: 11400000, guid: 362209aa4a1c4514c9e103c4ecdb6bdd, type: 2}
 --- !u!143 &1596457626
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1915,6 +1913,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1596457630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596457624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23290c68c1554b7439cd0dd0f9c1e271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction: 0
+  health: {fileID: 11400000, guid: f2fc66cf070f267448b710fb57e0b705, type: 2}
+  triggerAttack: {fileID: 0}
+  invincibleTime: 0.5
 --- !u!1 &1632597105
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,6 +2060,7 @@ GameObject:
   - component: {fileID: 1718246701}
   - component: {fileID: 1718246700}
   - component: {fileID: 1718246699}
+  - component: {fileID: 1718246704}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2062,11 +2077,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 1718246698}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e306e63376c35444b9f013e6c76d535a, type: 3}
+  m_Script: {fileID: 11500000, guid: e65a0cc8d170d804290af4b7bd18a0fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: {fileID: 11400000, guid: 5261903538d71e944860ad28075c9863, type: 2}
-  knockBackForce: 20
+  triggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1718246704}
+        m_TargetAssemblyTypeName: CombatBehaviour, Assembly-CSharp
+        m_MethodName: OnTriggerAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerStayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1718246700
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2143,6 +2177,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1718246704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718246698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23290c68c1554b7439cd0dd0f9c1e271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faction: 1
+  health: {fileID: 11400000, guid: c183b4dfeb5564b4490dd366115b6924, type: 2}
+  triggerAttack: {fileID: 11400000, guid: f7671e2bf57ff424997e512876d2fff5, type: 2}
+  invincibleTime: 0.5
 --- !u!1 &1733611341
 GameObject:
   m_ObjectHideFlags: 0

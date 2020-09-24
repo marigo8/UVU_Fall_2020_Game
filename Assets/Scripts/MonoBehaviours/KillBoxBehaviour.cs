@@ -6,10 +6,10 @@ public class KillBoxBehaviour : MonoBehaviour
 {
     private void OnTriggerStay(Collider other)
     {
-        var cm = other.GetComponent<PlayerBehaviour>();
-        if (cm != null)
+        var cb = other.GetComponent<CombatBehaviour>();
+        if (cb != null)
         {
-            cm.playerHealth.value = 0;
+            cb.health.SetZero();
         }
         else
         {

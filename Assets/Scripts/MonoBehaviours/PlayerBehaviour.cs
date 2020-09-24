@@ -12,6 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     private CharacterController controller;
     private MeshRenderer meshRenderer;
+    private CombatBehaviour combatBehaviour;
 
     [Header("UI")]
     [SerializeField] private Text healthText;
@@ -34,34 +35,36 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float gravity = -9.81f;
     private Vector3 addedForce;
     private bool leavingGround = false;
-    
-    [Header("Health and Respawn")]
-    public IntData playerHealth;
-    public TransformData currentSpawnPoint;
-    [SerializeField] private float invincibleTime, spawnTime = 3f;
-    [SerializeField] private IntData playerMaxHealth;
-    private bool invincible = false, dead = false;
-    private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
-    
-    public void TakeDamage(int damage, Vector3 force)
-    {
-        addedForce = force;
-        if (invincible) return;
-        playerHealth.value -= damage;
-        StartCoroutine(nameof(Invincibility));
-    }
 
+    [Header("Health and Respawn")] 
+    private HealthData health;
+    //public IntData playerHealth;
+    public TransformData currentSpawnPoint;
+    [SerializeField] private float /*invincibleTime,*/ spawnTime = 3f;
+    // [SerializeField] private IntData playerMaxHealth;
+    private bool /*invincible = false,*/ dead = false;
+    // private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
+    
+    // public void TakeDamage(int damage, Vector3 force)
+    // {
+    //     addedForce = force;
+    //     if (invincible) return;
+    //     health.health -= damage;
+    //     StartCoroutine(nameof(Invincibility));
+    // }
     private void Start()
     {
         playerCanMove = true;
         controller = GetComponent<CharacterController>();
         meshRenderer = GetComponent<MeshRenderer>();
+        combatBehaviour = GetComponent<CombatBehaviour>();
+        health = combatBehaviour.health;
         
         meshRenderer.material.shaderKeywords = new[] {"_EMISSION"};
         
         currentSpawnPoint.SetTransform(transform);
 
-        playerHealth.value = playerMaxHealth.value;
+        // health.health = playerMaxHealth.value;
 
         healthLabel = healthText.text;
     }
@@ -77,9 +80,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void CheckHealth()
     {
-        healthText.text = healthLabel + playerHealth.value;
+        healthText.text = healthLabel + health.health;
         
-        if (playerHealth.value > 0) return;
+        if (health.health > 0) return;
 
         Die();
     }
@@ -213,7 +216,7 @@ public class PlayerBehaviour : MonoBehaviour
         
         transform.position = currentSpawnPoint.position;
         transform.rotation = currentSpawnPoint.GetRotation();
-        playerHealth.value = playerMaxHealth.value;
+        health.Initialize();
 
         controller.enabled = true;
         meshRenderer.enabled = true;
@@ -226,16 +229,16 @@ public class PlayerBehaviour : MonoBehaviour
         dead = false;
     }
 
-    private IEnumerator Invincibility()
-    {
-        invincible = true;
-        meshRenderer.material.SetColor(EmissionColor,Color.red * Mathf.LinearToGammaSpace(10f));
-        
-        yield return new WaitForSeconds(invincibleTime);
-        
-        meshRenderer.material.SetColor(EmissionColor,Color.black * Mathf.LinearToGammaSpace(10f));
-        invincible = false;
-    }
+    // private IEnumerator Invincibility()
+    // {
+    //     invincible = true;
+    //     meshRenderer.material.SetColor(EmissionColor,Color.red * Mathf.LinearToGammaSpace(10f));
+    //     
+    //     yield return new WaitForSeconds(invincibleTime);
+    //     
+    //     meshRenderer.material.SetColor(EmissionColor,Color.black * Mathf.LinearToGammaSpace(10f));
+    //     invincible = false;
+    // }
 
     public void IncreaseJumpCount(PowerUpData powerUpData)
     {
