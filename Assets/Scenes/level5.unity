@@ -1079,7 +1079,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814165660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21, y: 1, z: 8}
+  m_LocalPosition: {x: 16.33, y: 1, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1954,7 +1954,7 @@ MonoBehaviour:
   characterRotateSpeed: 20
   moveSpeed: {fileID: 11400000, guid: 88045f42521cbc1448ffdd3af02e9d47, type: 2}
   sprintModifier: {fileID: 11400000, guid: fa8e9d3697f48ea499a9efc71cd46ccc, type: 2}
-  jumpForce: 9
+  jumpForce: 6.4
   playerJumpCount: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
   gravity: -19.62
   addedForce: {x: 0, y: 0, z: 0}
@@ -2703,7 +2703,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1860536510}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24, y: 1, z: 5}
+  m_LocalPosition: {x: 20.2, y: 1, z: 7.79}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children: []
   m_Father: {fileID: 0}
