@@ -80,17 +80,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    // // inspired by code at https://answers.unity.com/questions/1632526/character-controller-doesnt-move-with-a-moving-par.html
-    // private void OnControllerColliderHit(ControllerColliderHit hit)
-    // {
-    //     var platform = hit.transform.GetComponent<MovingPlatformBehaviour>();
-    //     if (controller.isGrounded && platform != null)
-    //     {
-    //         print(platform.velocity);
-    //         controller.Move(platform.velocity *Time.fixedDeltaTime);
-    //     }
-    // }
-
     private void CheckHealth()
     {
         healthText.text = healthLabel + health.health;

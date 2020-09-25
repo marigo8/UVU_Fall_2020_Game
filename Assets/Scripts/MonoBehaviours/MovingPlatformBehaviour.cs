@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class MovingPlatformBehaviour : MonoBehaviour
 {
     [HideInInspector] public Vector3 velocity;
@@ -56,7 +57,12 @@ public class MovingPlatformBehaviour : MonoBehaviour
         velocity = transform.position - previousPosition;
     }
 
-    private void OnDrawGizmos()
+    private void OnCollisionEnter(Collision other)
+    {
+        print("WAHH!");
+    }
+
+    private void OnDrawGizmosSelected()
     {
         Gizmos.DrawWireCube(transform.position + relativeDestination, transform.localScale);
         Gizmos.DrawLine(transform.position, transform.position + relativeDestination);

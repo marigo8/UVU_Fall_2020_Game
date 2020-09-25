@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class FirePointBehaviour : MonoBehaviour
 {
-    public GameObject prefab;
+    public GameObject projectile;
     public Vector3 offset;
 
     private Vector3 location;
     private Quaternion rotation;
     
     private Camera cam;
-    public Transform target;
+    public Vector3Data target;
 
     private void Start()
     {
@@ -23,21 +23,20 @@ public class FirePointBehaviour : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             var ray = cam.ScreenPointToRay(Input.mousePosition);
+            
             if (Physics.Raycast(ray, out var hit))
             {
-                target.position = hit.point;
+                target.value = hit.point;
 
-                transform.LookAt(target);
+                transform.LookAt(target.value);
                 var rot = transform.eulerAngles;
                 rot.x = 0;
                 transform.rotation = Quaternion.Euler(rot);
-                
-                InstantiatePrefab();
             }
         }
     }
     
-    private void InstantiatePrefab()
+    public void InstantiateProjectile()
     {
         
         rotation = transform.rotation;
@@ -47,7 +46,7 @@ public class FirePointBehaviour : MonoBehaviour
         direction = rotation * direction;
         location = direction + transform.position;
 
-        Instantiate(prefab,location,rotation);
+        Instantiate(projectile,location,rotation);
     }
 
     private void OnDrawGizmosSelected()
