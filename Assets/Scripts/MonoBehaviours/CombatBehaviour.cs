@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class CombatBehaviour : MonoBehaviour
@@ -70,6 +70,10 @@ public class CombatBehaviour : MonoBehaviour
     
     private IEnumerator Invincibility()
     {
+        if (isPlayer)
+        {
+            player.canMove = false;
+        }
         invincible = true;
         meshRenderer.material.SetColor(EmissionColor,Color.red * Mathf.LinearToGammaSpace(10f));
         
@@ -77,5 +81,10 @@ public class CombatBehaviour : MonoBehaviour
         
         meshRenderer.material.SetColor(EmissionColor,Color.black * Mathf.LinearToGammaSpace(10f));
         invincible = false;
+        
+        if (isPlayer)
+        {
+            player.canMove = true;
+        }
     }
 }

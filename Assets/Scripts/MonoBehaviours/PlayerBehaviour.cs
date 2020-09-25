@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Numerics;
 using UnityEngine;
@@ -18,12 +18,13 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private Text healthText;
     private string healthLabel;
 
-    [Header("Movement")]
+    [Header("Movement")] 
+    public bool canMove;
     [SerializeField] private float vehicleRotateSpeed = 120f, characterRotateSpeed = 10f;
     [SerializeField] private FloatData moveSpeed, sprintModifier;
-    private bool useVehicleStyle, playerCanMove;
+    private bool useVehicleStyle;
     private Vector3 movement;
-    private float moveSpeedModifier = 1f;
+    private float moveSpeedModifier = 1f; 
 
     [Header("Jump")]
     [SerializeField] private float jumpForce = 30f;
@@ -43,6 +44,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float /*invincibleTime,*/ spawnTime = 3f;
     // [SerializeField] private IntData playerMaxHealth;
     private bool /*invincible = false,*/ dead = false;
+
     // private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
     
     // public void TakeDamage(int damage, Vector3 force)
@@ -54,7 +56,7 @@ public class PlayerBehaviour : MonoBehaviour
     // }
     private void Start()
     {
-        playerCanMove = true;
+        canMove = true;
         controller = GetComponent<CharacterController>();
         meshRenderer = GetComponent<MeshRenderer>();
         combatBehaviour = GetComponent<CombatBehaviour>();
@@ -78,6 +80,17 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+    // // inspired by code at https://answers.unity.com/questions/1632526/character-controller-doesnt-move-with-a-moving-par.html
+    // private void OnControllerColliderHit(ControllerColliderHit hit)
+    // {
+    //     var platform = hit.transform.GetComponent<MovingPlatformBehaviour>();
+    //     if (controller.isGrounded && platform != null)
+    //     {
+    //         print(platform.velocity);
+    //         controller.Move(platform.velocity *Time.fixedDeltaTime);
+    //     }
+    // }
+
     private void CheckHealth()
     {
         healthText.text = healthLabel + health.health;
@@ -95,18 +108,15 @@ public class PlayerBehaviour : MonoBehaviour
         {
             useVehicleStyle = !useVehicleStyle;
         }
+        
+        if (useVehicleStyle)
+            MoveVehicleStyle();
+        else
+            MoveNormalStyle();
 
-        if (playerCanMove)
-        {
-            if (useVehicleStyle)
-                MoveVehicleStyle();
-            else
-                MoveNormalStyle();
+        movement *= moveSpeedModifier;
 
-            movement *= moveSpeedModifier;
-
-            Jump();
-        }
+        Jump();
 
         movement.y = yVar;
         
@@ -153,8 +163,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void MoveNormalStyle()
     {
-        var hInput = Input.GetAxis("Horizontal");
-        var vInput = Input.GetAxis("Vertical");
+        var hInput = 0f;
+        var vInput = 0f;
+        if (canMove)
+        {
+            hInput = Input.GetAxis("Horizontal");
+            vInput = Input.GetAxis("Vertical");
+        }
         movement.Set(hInput, 0, vInput);
         movement = Vector3.ClampMagnitude(movement, 1f) * moveSpeed.value;
         
