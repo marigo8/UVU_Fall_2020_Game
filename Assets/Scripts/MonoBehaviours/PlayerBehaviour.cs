@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Numerics;
 using UnityEngine;
@@ -262,10 +262,8 @@ public class PlayerBehaviour : MonoBehaviour
         moveSpeedModifier -= powerUpData.floatValue;
     }
 
-    public void AddForce(float attackKnockback, Vector3 attackerPos)
+    public void AddForce(Vector3 force)
     {
-        var force = transform.position - attackerPos;
-        force = force.normalized * attackKnockback;
         addedForce += force;
     }
 }

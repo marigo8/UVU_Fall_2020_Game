@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 
 public class CombatBehaviour : MonoBehaviour
@@ -50,7 +50,9 @@ public class CombatBehaviour : MonoBehaviour
 
         if (isPlayer)
         {
-            player.AddForce(attack.knockback, attackerPos);
+            var force = transform.position - attackerPos;
+            force = force.normalized * attack.knockback;
+            player.AddForce(force);
         }
         
         StartCoroutine(nameof(Invincibility));
