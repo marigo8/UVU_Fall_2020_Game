@@ -33,7 +33,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Physics")] 
     [SerializeField] private float gravity = -9.81f;
-    private Vector3 addedForce;
+    public Vector3 addedForce;
     private bool leavingGround = false;
 
     [Header("Health and Respawn")] 
@@ -260,5 +260,12 @@ public class PlayerBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(powerUpData.time);
         moveSpeedModifier -= powerUpData.floatValue;
+    }
+
+    public void AddForce(float attackKnockback, Vector3 attackerPos)
+    {
+        var force = transform.position - attackerPos;
+        force = force.normalized * attackKnockback;
+        addedForce += force;
     }
 }

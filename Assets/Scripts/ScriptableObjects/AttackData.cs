@@ -4,5 +4,6 @@
 public class AttackData : ScriptableObject
 {
     public int damage;
-    //public float knockBack;
+
+    public float knockback;
 }

@@ -10,6 +10,9 @@ public class CombatBehaviour : MonoBehaviour
     [SerializeField] private AttackData triggerAttack;
 
     private MeshRenderer meshRenderer;
+    private PlayerBehaviour player;
+    private EnemyBehaviour enemy;
+    private bool isPlayer, isEnemy;
 
     [SerializeField] private float invincibleTime = 1f;
     private bool invincible = false;
@@ -18,6 +21,16 @@ public class CombatBehaviour : MonoBehaviour
     private void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+        enemy = GetComponent<EnemyBehaviour>();
+        if (enemy != null)
+        {
+            isEnemy = true;
+        }
+        else
+        {
+            player = GetComponent<PlayerBehaviour>();
+            isPlayer = true;
+        }
     }
 
     private void OnEnable()
@@ -25,15 +38,21 @@ public class CombatBehaviour : MonoBehaviour
         health.Initialize();
     }
 
-    private static void Attack(CombatBehaviour target, AttackData attack)
+    private static void Attack(CombatBehaviour target, AttackData attack, CombatBehaviour attacker)
     {
-        target.TakeHit(attack);
+        target.TakeHit(attack, attacker.transform.position);
     }
 
-    public void TakeHit(AttackData attack)
+    public void TakeHit(AttackData attack, Vector3 attackerPos)
     {
         if (invincible) return;
         health.AffectHealth(-attack.damage);
+
+        if (isPlayer)
+        {
+            player.AddForce(attack.knockback, attackerPos);
+        }
+        
         StartCoroutine(nameof(Invincibility));
     }
 
@@ -44,7 +63,7 @@ public class CombatBehaviour : MonoBehaviour
         if (target == null) return;
         if (target.faction == faction) return;
         
-        Attack(target, triggerAttack);
+        Attack(target, triggerAttack, this);
     }
     
     private IEnumerator Invincibility()
