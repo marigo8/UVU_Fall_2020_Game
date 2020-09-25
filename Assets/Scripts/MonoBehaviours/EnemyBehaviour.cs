@@ -6,8 +6,9 @@ using UnityEngine.AI;
 public class EnemyBehaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
-    
     public Transform target;
+
+    private bool followTarget = false;
 
     private void Start()
     {
@@ -16,6 +17,17 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Update()
     {
-        agent.destination = target.position;
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            followTarget = !followTarget;
+        }
+        if (followTarget)
+        {
+            agent.destination = target.position;
+        }
+        else
+        {
+            agent.destination = transform.position;
+        }
     }
 }
