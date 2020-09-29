@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class ProjectileBehaviour : MonoBehaviour
 {
     private Rigidbody rb;
-    public Vector3 force;
+    
+    [SerializeField] private Vector3 force;
+    [SerializeField] private float lifeTime;
 
-    private void Start()
+    private IEnumerator Start()
     {
         rb = GetComponent<Rigidbody>();
         var forceDirection = force;
         rb.AddRelativeForce(forceDirection);
+
+        yield return new WaitForSeconds(lifeTime);
+        Destroy(gameObject);
     }
 }

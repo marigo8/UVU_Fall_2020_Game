@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb7707b2c5b79a448ebb37dc6a34be6, type: 3}
-  m_Name: PlayerHealth
+  m_Script: {fileID: 11500000, guid: 864c764777ee1fb4789d520ef0df7052, type: 3}
+  m_Name: PlayerTargetVector3
   m_EditorClassIdentifier: 
-  value: -7
+  value: {x: -6.675933, y: 2.289065e-16, z: -10.3090315}

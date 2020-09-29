@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864c764777ee1fb4789d520ef0df7052, type: 3}
-  m_Name: PlayerTarget
+  m_Script: {fileID: 11500000, guid: a941ab928e80c0d4fb19760fbf0d1d32, type: 3}
+  m_Name: PlayerSpeedFloat
   m_EditorClassIdentifier: 
-  value: {x: 0, y: 0, z: 0}
+  useClamp: 0
+  value: 6
+  startingValue: 6
+  maxValue: 0
+  startingMax: 0

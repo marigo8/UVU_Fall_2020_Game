@@ -78,4 +78,19 @@ public class FloatData : ScriptableObject
             SetZero();
         }
     }
+
+    private void SetFromVectorX(Vector3Data vector)
+    {
+        value = vector.value.x;
+    }
+    
+    private void SetFromVectorY(Vector3Data vector)
+    {
+        value = vector.value.y;
+    }
+    
+    private void SetFromVectorZ(Vector3Data vector)
+    {
+        value = vector.value.z;
+    }
 }
