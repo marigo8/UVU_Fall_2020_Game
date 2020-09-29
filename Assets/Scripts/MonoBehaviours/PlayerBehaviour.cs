@@ -38,10 +38,11 @@ public class PlayerBehaviour : MonoBehaviour
     private bool leavingGround = false;
 
     [Header("Health and Respawn")] 
-    private HealthData health;
+    private FloatData health;
     //public IntData playerHealth;
     public TransformData currentSpawnPoint;
     [SerializeField] private float /*invincibleTime,*/ spawnTime = 3f;
+    private WaitForSeconds spawnTimeWait;
     // [SerializeField] private IntData playerMaxHealth;
     private bool /*invincible = false,*/ dead = false;
 
@@ -56,6 +57,7 @@ public class PlayerBehaviour : MonoBehaviour
     // }
     private void Start()
     {
+        spawnTimeWait = new WaitForSeconds(spawnTime);
         canMove = true;
         controller = GetComponent<CharacterController>();
         meshRenderer = GetComponent<MeshRenderer>();
@@ -82,9 +84,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void CheckHealth()
     {
-        healthText.text = healthLabel + health.health;
+        healthText.text = healthLabel + health.value;
         
-        if (health.health > 0) return;
+        if (health.value > 0) return;
 
         Die();
     }
@@ -216,11 +218,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     private IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(spawnTime);
+        yield return spawnTimeWait;
         
         transform.position = currentSpawnPoint.position;
         transform.rotation = currentSpawnPoint.GetRotation();
-        health.Initialize();
+        health.SetMax();
 
         controller.enabled = true;
         meshRenderer.enabled = true;

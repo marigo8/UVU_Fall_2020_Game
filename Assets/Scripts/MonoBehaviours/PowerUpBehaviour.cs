@@ -7,8 +7,14 @@ using UnityEngine.Serialization;
 public class PowerUpBehaviour : MonoBehaviour
 {
     public float respawnTime;
+    public WaitForSeconds respawnTimeWait;
     public UnityEvent powerUpAction;
 
+    private void Start()
+    {
+        respawnTimeWait = new WaitForSeconds(respawnTime);
+    }
+    
     private IEnumerator OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerBehaviour>() == null) yield break;
@@ -20,7 +26,7 @@ public class PowerUpBehaviour : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Collider>().enabled = false;
             
-            yield return new WaitForSeconds(respawnTime);
+            yield return respawnTimeWait;
             
             GetComponent<MeshRenderer>().enabled = true;
             GetComponent<Collider>().enabled = true;

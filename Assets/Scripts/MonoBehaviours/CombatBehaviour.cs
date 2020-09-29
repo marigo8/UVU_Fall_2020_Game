@@ -6,7 +6,7 @@ public class CombatBehaviour : MonoBehaviour
     public enum FactionEnum {Good,Bad,Ugly}
 
     public FactionEnum faction;
-    public HealthData health;
+    public FloatData health;
     [SerializeField] private AttackData triggerAttack;
 
     private MeshRenderer meshRenderer;
@@ -15,11 +15,13 @@ public class CombatBehaviour : MonoBehaviour
     private bool isPlayer, isEnemy;
 
     [SerializeField] private float invincibleTime = 1f;
+    private WaitForSeconds invincibleTimeWait;
     private bool invincible = false;
     private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
     private void Start()
     {
+        invincibleTimeWait = new WaitForSeconds(invincibleTime);
         meshRenderer = GetComponent<MeshRenderer>();
         enemy = GetComponent<EnemyBehaviour>();
         if (enemy != null)
@@ -35,7 +37,7 @@ public class CombatBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
-        health.Initialize();
+        health.SetMax();
     }
 
     private static void Attack(CombatBehaviour target, AttackData attack, CombatBehaviour attacker)
@@ -46,7 +48,7 @@ public class CombatBehaviour : MonoBehaviour
     public void TakeHit(AttackData attack, Vector3 attackerPos)
     {
         if (invincible) return;
-        health.AffectHealth(-attack.damage);
+        health.UpdateValue(-attack.damage);
 
         if (isPlayer)
         {
@@ -77,7 +79,7 @@ public class CombatBehaviour : MonoBehaviour
         invincible = true;
         meshRenderer.material.SetColor(EmissionColor,Color.red * Mathf.LinearToGammaSpace(10f));
         
-        yield return new WaitForSeconds(invincibleTime);
+        yield return invincibleTimeWait;
         
         meshRenderer.material.SetColor(EmissionColor,Color.black * Mathf.LinearToGammaSpace(10f));
         invincible = false;
