@@ -40,7 +40,7 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Health and Respawn")] 
     private FloatData health;
     //public IntData playerHealth;
-    public TransformData currentSpawnPoint;
+    public Vector3 spawnPointPosition;
     [SerializeField] private float /*invincibleTime,*/ spawnTime = 3f;
     private WaitForSeconds spawnTimeWait;
     // [SerializeField] private IntData playerMaxHealth;
@@ -66,7 +66,7 @@ public class PlayerBehaviour : MonoBehaviour
         
         meshRenderer.material.shaderKeywords = new[] {"_EMISSION"};
         
-        currentSpawnPoint.SetTransform(transform);
+        //spawnPointPosition.SetTransform(transform);
 
         // health.health = playerMaxHealth.value;
 
@@ -77,19 +77,19 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (!dead)
         {
-            CheckHealth();
+            // CheckHealth();
             Movement();
         }
     }
 
-    private void CheckHealth()
-    {
-        healthText.text = healthLabel + health.value;
-        
-        if (health.value > 0) return;
-
-        Die();
-    }
+    // private void CheckHealth()
+    // {
+    //     healthText.text = healthLabel + health.value;
+    //     
+    //     if (health.value > 0) return;
+    //
+    //     Die();
+    // }
     
     private void Movement()
     {
@@ -199,41 +199,41 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
     
-    private void Die()
-    {
-        if (dead) return;
-        dead = true;
+    // private void Die()
+    // {
+    //     if (dead) return;
+    //     dead = true;
+    //
+    //     addedForce = Vector3.zero;
+    //     
+    //     controller.enabled = false;
+    //     meshRenderer.enabled = false;
+    //     for (var i = 0; i < transform.childCount; i++)
+    //     {
+    //         transform.GetChild(i).gameObject.SetActive(false);
+    //     }
+    //
+    //     StartCoroutine(nameof(Respawn));
+    // }
 
-        addedForce = Vector3.zero;
-        
-        controller.enabled = false;
-        meshRenderer.enabled = false;
-        for (var i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(false);
-        }
-
-        StartCoroutine(nameof(Respawn));
-    }
-
-    private IEnumerator Respawn()
-    {
-        yield return spawnTimeWait;
-        
-        transform.position = currentSpawnPoint.position;
-        transform.rotation = currentSpawnPoint.GetRotation();
-        health.SetMax();
-
-        controller.enabled = true;
-        meshRenderer.enabled = true;
-        
-        for (var i = 0; i < transform.childCount; i++)
-        {
-            transform.GetChild(i).gameObject.SetActive(true);
-        }
-        
-        dead = false;
-    }
+    // private IEnumerator Respawn()
+    // {
+    //     yield return spawnTimeWait;
+    //     
+    //     //transform.position = spawnPointPosition.position;
+    //     //transform.rotation = spawnPointPosition.GetRotation();
+    //     health.SetMax();
+    //
+    //     controller.enabled = true;
+    //     meshRenderer.enabled = true;
+    //     
+    //     for (var i = 0; i < transform.childCount; i++)
+    //     {
+    //         transform.GetChild(i).gameObject.SetActive(true);
+    //     }
+    //     
+    //     dead = false;
+    // }
 
     // private IEnumerator Invincibility()
     // {

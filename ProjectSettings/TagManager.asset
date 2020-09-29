@@ -13,13 +13,13 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Ground
+  - NPC
+  - PlayerKillBox
+  - Item
+  - SpawnPoint
+  - Pushable
   - 
   - 
   - 

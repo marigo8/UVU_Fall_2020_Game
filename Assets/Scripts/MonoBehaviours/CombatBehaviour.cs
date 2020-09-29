@@ -37,7 +37,7 @@ public class CombatBehaviour : MonoBehaviour
 
     private void OnEnable()
     {
-        health.SetMax();
+        health.Reset();
     }
 
     private static void Attack(CombatBehaviour target, AttackData attack, CombatBehaviour attacker)

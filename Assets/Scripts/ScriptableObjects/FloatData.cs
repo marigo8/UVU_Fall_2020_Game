@@ -3,13 +3,50 @@
 [CreateAssetMenu]
 public class FloatData : ScriptableObject
 {
-    public bool hasMax;
-    public float value, maxValue;
+    public bool useClamp;
+    public float value, startingValue, maxValue, startingMax;
+
+    public void Reset()
+    {
+        value = startingValue;
+    }
+
+    public void ResetMax()
+    {
+        maxValue = startingMax;
+    }
 
     public void UpdateValue(float amount)
     {
         value += amount;
-        if (hasMax)
+        if (useClamp)
+        {
+            ClampValue();
+        }
+    }
+
+    public void SetValue(float amount)
+    {
+        value = amount;
+        if (useClamp)
+        {
+            ClampValue();
+        }
+    }
+
+    public void UpdateMaxValue(float amount)
+    {
+        maxValue += amount;
+        if (useClamp)
+        {
+            ClampValue();
+        }
+    }
+
+    public void SetMaxValue(float amount)
+    {
+        maxValue = amount;
+        if (useClamp)
         {
             ClampValue();
         }
@@ -35,6 +72,10 @@ public class FloatData : ScriptableObject
         if (value > maxValue)
         {
             SetMax();
+        }
+        else if (value < 0)
+        {
+            SetZero();
         }
     }
 }

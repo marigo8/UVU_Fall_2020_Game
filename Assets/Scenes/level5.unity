@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 119766798}
   - component: {fileID: 119766797}
   - component: {fileID: 119766796}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +297,7 @@ GameObject:
   - component: {fileID: 435732264}
   - component: {fileID: 435732263}
   - component: {fileID: 435732262}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 733805088}
   - component: {fileID: 733805087}
   - component: {fileID: 733805086}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Spawn Point 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 751014964}
   - component: {fileID: 751014963}
   - component: {fileID: 751014962}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Speed Power Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +712,7 @@ GameObject:
   - component: {fileID: 788560895}
   - component: {fileID: 788560894}
   - component: {fileID: 788560893}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -804,7 +804,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 792720384}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -839,7 +839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 809316354}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Staircase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -878,7 +878,7 @@ GameObject:
   - component: {fileID: 812312137}
   - component: {fileID: 812312136}
   - component: {fileID: 812312135}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -974,7 +974,7 @@ GameObject:
   - component: {fileID: 814165663}
   - component: {fileID: 814165662}
   - component: {fileID: 814165661}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Jump Power Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1197,7 +1197,7 @@ GameObject:
   - component: {fileID: 1080335413}
   - component: {fileID: 1080335412}
   - component: {fileID: 1080335411}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Spawn Point 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1305,7 +1305,7 @@ GameObject:
   - component: {fileID: 1189347696}
   - component: {fileID: 1189347695}
   - component: {fileID: 1189347694}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1446,7 +1446,7 @@ GameObject:
   - component: {fileID: 1324738401}
   - component: {fileID: 1324738400}
   - component: {fileID: 1324738399}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1633,7 +1633,7 @@ GameObject:
   - component: {fileID: 1412448149}
   - component: {fileID: 1412448148}
   - component: {fileID: 1412448147}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ramp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1812,7 +1812,7 @@ GameObject:
   - component: {fileID: 1539236994}
   - component: {fileID: 1539236993}
   - component: {fileID: 1539236997}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Main Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1929,7 +1929,8 @@ GameObject:
   - component: {fileID: 1596457626}
   - component: {fileID: 1596457630}
   - component: {fileID: 1596457631}
-  m_Layer: 0
+  - component: {fileID: 1596457632}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1958,7 +1959,7 @@ MonoBehaviour:
   playerJumpCount: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
   gravity: -19.62
   addedForce: {x: 0, y: 0, z: 0}
-  currentSpawnPoint: {fileID: 11400000, guid: f08cc56aef7d7044f9a9123ea9c1990a, type: 2}
+  spawnPointPosition: {x: 0, y: 0, z: 0}
   spawnTime: 3
 --- !u!143 &1596457626
 CharacterController:
@@ -2089,6 +2090,34 @@ MonoBehaviour:
   mouseDownOnObjectEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1596457632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596457624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05fe19face60a248bca3535515bc32e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: 71072be526b41e747838f0e0851b87f7, type: 2}
+  zeroEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e3bd42caa5e7f2440be3ae4eb2ac938f, type: 2}
+        m_TargetAssemblyTypeName: Debugger, Assembly-CSharp
+        m_MethodName: OnDebug
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: oof
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1610141095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2102,7 +2131,7 @@ GameObject:
   - component: {fileID: 1610141098}
   - component: {fileID: 1610141097}
   - component: {fileID: 1610141096}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2335,7 +2364,7 @@ GameObject:
   - component: {fileID: 1718246704}
   - component: {fileID: 1718246706}
   - component: {fileID: 1718246705}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2514,7 +2543,8 @@ GameObject:
   - component: {fileID: 1733611343}
   - component: {fileID: 1733611342}
   - component: {fileID: 1733611345}
-  m_Layer: 0
+  - component: {fileID: 1733611346}
+  m_Layer: 11
   m_Name: Kill Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2568,6 +2598,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 422df10b432d58842be0e0a3ba172f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1733611346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733611341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65a0cc8d170d804290af4b7bd18a0fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 71072be526b41e747838f0e0851b87f7, type: 2}
+        m_TargetAssemblyTypeName: FloatData, Assembly-CSharp
+        m_MethodName: SetZero
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  stayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  exitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1766635153
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,7 +2645,7 @@ GameObject:
   - component: {fileID: 1766635155}
   - component: {fileID: 1766635159}
   - component: {fileID: 1766635154}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Moving Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2710,7 +2773,7 @@ GameObject:
   - component: {fileID: 1860536513}
   - component: {fileID: 1860536512}
   - component: {fileID: 1860536511}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Triple Jump Power Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2978,7 +3041,7 @@ GameObject:
   - component: {fileID: 2107904847}
   - component: {fileID: 2107904846}
   - component: {fileID: 2107904845}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,17 +1,39 @@
-﻿using UnityEngine;
+﻿using UnityEditor.PackageManager;
+using UnityEngine;
 
 [CreateAssetMenu]
 public class Vector3Data : ScriptableObject
 {
     public Vector3 value;
 
-    public void SetValue(Vector3 newValue)
+    public void SetValueFromVector3(Vector3 vector3)
     {
-        value = newValue;
+        value = vector3;
     }
 
-    public void SetFromMousePosition(Camera cam)
+    public void SetValueFromPosition(Transform transformObj)
     {
+        value = transformObj.position;
+    }
+
+    public void SetValueFromRotation(Transform transformObj)
+    {
+        value = transformObj.eulerAngles;
+    }
+
+    public void SetPositionFromValue(Transform transformObj)
+    {
+        transformObj.position = value;
+    }
+
+    public void SetRotationFromValue(Transform transformObj)
+    {
+        transformObj.eulerAngles = value;
+    }
+
+    public void SetFromMousePosition()
+    {
+        if (Camera.main == null) return;
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit);
         value = hit.point;
     }
