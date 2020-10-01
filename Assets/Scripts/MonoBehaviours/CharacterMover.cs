@@ -102,4 +102,9 @@ public class CharacterMover : MonoBehaviour
             movement += addedForce;
         }
     }
+    
+    public void AddForce(Vector3 force)
+    {
+        addedForce += force;
+    }
 }
