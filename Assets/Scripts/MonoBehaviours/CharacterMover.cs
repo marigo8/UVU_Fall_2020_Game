@@ -57,6 +57,7 @@ public class CharacterMover : MonoBehaviour
         {
             hInput = Input.GetAxis("Horizontal");
             vInput = Input.GetAxis("Vertical");
+            Debug.Log(hInput);
         }
         movement.Set(hInput, 0, vInput);
         movement = Vector3.ClampMagnitude(movement, 1f) * moveSpeed;
