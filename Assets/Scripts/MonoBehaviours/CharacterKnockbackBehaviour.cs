@@ -6,7 +6,7 @@ using UnityEngine;
 public class CharacterKnockbackBehaviour : MonoBehaviour
 {
     public float knockbackForce;
-    private void OnTriggerEnter(Collider other)
+    public void Knockback(Collider other)
     {
         var character = other.GetComponent<CharacterMover>();
         if (character == null) return;

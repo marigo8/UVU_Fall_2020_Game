@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: PlayerHealthFloat
   m_EditorClassIdentifier: 
   useClamp: 1
-  value: 0
-  startingValue: 6
+  value: 6
   maxValue: 6
-  startingMax: 6

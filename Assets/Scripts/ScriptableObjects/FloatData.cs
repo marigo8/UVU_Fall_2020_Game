@@ -1,63 +1,42 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu]
 public class FloatData : ScriptableObject
 {
     public bool useClamp;
-    public float value, startingValue, maxValue, startingMax;
-
-    public void Reset()
-    {
-        value = startingValue;
-    }
-
-    public void ResetMax()
-    {
-        maxValue = startingMax;
-    }
+    public float value, maxValue;
 
     public void UpdateValue(float amount)
     {
         value += amount;
-        if (useClamp)
-        {
-            ClampValue();
-        }
+        ClampValue();
     }
 
     public void SetValue(float amount)
     {
         value = amount;
-        if (useClamp)
-        {
-            ClampValue();
-        }
+        ClampValue();
     }
 
     public void UpdateMaxValue(float amount)
     {
         maxValue += amount;
-        if (useClamp)
-        {
-            ClampValue();
-        }
+        ClampValue();
     }
 
     public void SetMaxValue(float amount)
     {
         maxValue = amount;
-        if (useClamp)
-        {
-            ClampValue();
-        }
+        ClampValue();
     }
 
-    public void SetMax()
+    public void SetValueToMax()
     {
         value = maxValue;
     }
 
-    public void SetZero()
+    public void SetValueToZero()
     {
         value = 0;
     }
@@ -69,13 +48,14 @@ public class FloatData : ScriptableObject
 
     private void ClampValue()
     {
+        if (!useClamp) return;
         if (value > maxValue)
         {
-            SetMax();
+            SetValueToMax();
         }
         else if (value < 0)
         {
-            SetZero();
+            SetValueToZero();
         }
     }
 
