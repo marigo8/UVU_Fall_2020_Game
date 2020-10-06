@@ -29,6 +29,11 @@ public class CharacterMover : MonoBehaviour
             Movement();
         }
     }
+
+    private void OnEnable()
+    {
+        addedForce = Vector3.zero;
+    }
     private void GroundCheck()
     {
         if (controller.isGrounded && yVar <= 0)
@@ -57,7 +62,6 @@ public class CharacterMover : MonoBehaviour
         {
             hInput = Input.GetAxis("Horizontal");
             vInput = Input.GetAxis("Vertical");
-            Debug.Log(hInput);
         }
         movement.Set(hInput, 0, vInput);
         movement = Vector3.ClampMagnitude(movement, 1f) * moveSpeed;
