@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Text))]
 public class FloatDataHudBehaviour : MonoBehaviour
 {
     public FloatData data;
