@@ -83,16 +83,16 @@ public class PlayerLifeBehaviour : MonoBehaviour
         invincible = false;
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            TakeDamage(1);
-            var knockback = hit.gameObject.GetComponent<CharacterKnockbackBehaviour>();
-            if (knockback != null)
-            {
-                knockback.Knockback(controller);
-            }
-        }
-    }
+    // private void OnControllerColliderHit(ControllerColliderHit hit)
+    // {
+    //     if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+    //     {
+    //         TakeDamage(1);
+    //         var knockback = hit.gameObject.GetComponent<CharacterKnockbackBehaviour>();
+    //         if (knockback != null)
+    //         {
+    //             knockback.Knockback(controller);
+    //         }
+    //     }
+    // }
 }
