@@ -39,7 +39,7 @@ public class CharacterMover : MonoBehaviour
         if (controller.isGrounded && yVar <= 0)
         {
             //yVar = -1f;
-            jumpCount.SetZero();
+            jumpCount.value = 0;
             leavingGround = true;
         }
         else

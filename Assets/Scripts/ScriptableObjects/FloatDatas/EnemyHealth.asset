@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a941ab928e80c0d4fb19760fbf0d1d32, type: 3}
   m_Name: EnemyHealth
   m_EditorClassIdentifier: 
-  hasMax: 0
+  label: Enemy Health
+  useClamp: 0
   value: 0
   maxValue: 0

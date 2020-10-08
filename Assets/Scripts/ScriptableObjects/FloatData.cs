@@ -4,6 +4,7 @@ using UnityEngine.Events;
 [CreateAssetMenu]
 public class FloatData : ScriptableObject
 {
+    public string label;
     public bool useClamp;
     public float value, maxValue;
 

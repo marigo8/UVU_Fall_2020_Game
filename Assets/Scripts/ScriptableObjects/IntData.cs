@@ -1,76 +1,62 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu]
 public class IntData : ScriptableObject
 {
+    public string label;
     public bool useClamp;
-    public int value, startingValue, maxValue, startingMax;
-
-    public void Reset()
-    {
-        value = startingValue;
-    }
-
-    public void ResetMax()
-    {
-        maxValue = startingMax;
-    }
+    public int value, maxValue;
 
     public void UpdateValue(int amount)
     {
         value += amount;
-        if (useClamp)
-        {
-            ClampValue();
-        }
+        ClampValue();
     }
 
     public void SetValue(int amount)
     {
         value = amount;
-        if (useClamp)
-        {
-            ClampValue();
-        }
+        ClampValue();
     }
 
     public void UpdateMaxValue(int amount)
     {
         maxValue += amount;
-        if (useClamp)
-        {
-            ClampValue();
-        }
+        ClampValue();
     }
 
     public void SetMaxValue(int amount)
     {
         maxValue = amount;
-        if (useClamp)
-        {
-            ClampValue();
-        }
+        ClampValue();
     }
 
-    public void SetMax()
+    public void SetValueToMax()
     {
         value = maxValue;
     }
 
-    public void SetZero()
+    public void SetValueToZero()
     {
         value = 0;
     }
 
+    public float GetFraction()
+    {
+        return value / maxValue;
+    }
+
     private void ClampValue()
     {
+        if (!useClamp) return;
         if (value > maxValue)
         {
-            SetMax();
+            SetValueToMax();
         }
         else if (value < 0)
         {
-            SetZero();
+            SetValueToZero();
         }
     }
 }

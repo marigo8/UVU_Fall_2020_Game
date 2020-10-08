@@ -8,7 +8,7 @@ public class PlayerLifeBehaviour : MonoBehaviour
     public UnityEvent respawnEvent, deathEvent;
     
     [SerializeField] private float respawnTime, invincibleTime;
-    [SerializeField] private FloatData health;
+    [SerializeField] private IntData health;
     [SerializeField] private Vector3Data spawnPoint, spawnDirection;
 
     private CharacterController controller;
@@ -17,7 +17,7 @@ public class PlayerLifeBehaviour : MonoBehaviour
     private bool dead, invincible = false;
     private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         if (invincible) return;
         health.UpdateValue(-damage);
@@ -74,7 +74,6 @@ public class PlayerLifeBehaviour : MonoBehaviour
     
     private IEnumerator Invincibility()
     {
-        Debug.Log("Can't Touch This");
         invincible = true;
         meshRenderer.material.SetColor(EmissionColor,Color.red * Mathf.LinearToGammaSpace(10f));
         
