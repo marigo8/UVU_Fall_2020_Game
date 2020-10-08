@@ -5,10 +5,13 @@ using UnityEngine.Events;
 public class FloatData : ScriptableObject
 {
     public string label;
+    public float value;
+    public float maxValue;
     public bool useClamp;
-    public float value, maxValue;
 
-    public void UpdateValue(float amount)
+    public bool IsMaxed => value >= maxValue;
+
+    public void AddToValue(float amount)
     {
         value += amount;
         ClampValue();
@@ -20,7 +23,7 @@ public class FloatData : ScriptableObject
         ClampValue();
     }
 
-    public void UpdateMaxValue(float amount)
+    public void AddToMaxValue(float amount)
     {
         maxValue += amount;
         ClampValue();
@@ -37,41 +40,17 @@ public class FloatData : ScriptableObject
         value = maxValue;
     }
 
-    public void SetValueToZero()
-    {
-        value = 0;
-    }
-
-    public float GetFraction()
-    {
-        return value / maxValue;
-    }
-
     private void ClampValue()
     {
         if (!useClamp) return;
-        if (value > maxValue)
+
+        if (value < 0f)
+        {
+            value = 0f;
+        }
+        else if (value > maxValue)
         {
             SetValueToMax();
         }
-        else if (value < 0)
-        {
-            SetValueToZero();
-        }
-    }
-
-    private void SetFromVectorX(Vector3Data vector)
-    {
-        value = vector.value.x;
-    }
-    
-    private void SetFromVectorY(Vector3Data vector)
-    {
-        value = vector.value.y;
-    }
-    
-    private void SetFromVectorZ(Vector3Data vector)
-    {
-        value = vector.value.z;
     }
 }

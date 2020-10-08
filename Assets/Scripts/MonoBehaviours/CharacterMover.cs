@@ -90,7 +90,7 @@ public class CharacterMover : MonoBehaviour
         if (Input.GetButtonDown("Jump") && jumpCount.value < jumpCount.maxValue)
         {
             yVar = jumpForce;
-            jumpCount.UpdateValue(1);
+            jumpCount.AddToValue(1);
         }
     }
 

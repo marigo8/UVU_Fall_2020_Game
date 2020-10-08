@@ -1,14 +1,18 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 [CreateAssetMenu]
 public class IntData : ScriptableObject
 {
     public string label;
+    public int value;
+    public int maxValue;
     public bool useClamp;
-    public int value, maxValue;
 
-    public void UpdateValue(int amount)
+    public bool IsMaxed => value >= maxValue;
+
+    public void AddToValue(int amount)
     {
         value += amount;
         ClampValue();
@@ -20,7 +24,7 @@ public class IntData : ScriptableObject
         ClampValue();
     }
 
-    public void UpdateMaxValue(int amount)
+    public void AddToMaxValue(int amount)
     {
         maxValue += amount;
         ClampValue();
@@ -37,26 +41,17 @@ public class IntData : ScriptableObject
         value = maxValue;
     }
 
-    public void SetValueToZero()
-    {
-        value = 0;
-    }
-
-    public float GetFraction()
-    {
-        return value / maxValue;
-    }
-
     private void ClampValue()
     {
         if (!useClamp) return;
-        if (value > maxValue)
+
+        if (value < 0)
+        {
+            value = 0;
+        }
+        else if (value > maxValue)
         {
             SetValueToMax();
-        }
-        else if (value < 0)
-        {
-            SetValueToZero();
         }
     }
 }

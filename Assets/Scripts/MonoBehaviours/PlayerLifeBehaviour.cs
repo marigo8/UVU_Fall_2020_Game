@@ -20,7 +20,7 @@ public class PlayerLifeBehaviour : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (invincible) return;
-        health.UpdateValue(-damage);
+        health.AddToValue(-damage);
         StartCoroutine(Invincibility());
     }
 

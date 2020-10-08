@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864c764777ee1fb4789d520ef0df7052, type: 3}
   m_Name: PlayerSpawnDirection
   m_EditorClassIdentifier: 
-  value: {x: 0, y: 0, z: 0}
+  label: Spawn Direction
+  value: {x: -0, y: 0, z: 0}

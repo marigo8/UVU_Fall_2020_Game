@@ -12,7 +12,7 @@ public class PlayerBehaviour : MonoBehaviour
 {
     private CharacterController controller;
     private MeshRenderer meshRenderer;
-    private CombatBehaviour combatBehaviour;
+    //private CombatBehaviour combatBehaviour;
 
     [Header("UI")]
     [SerializeField] private Text healthText;
@@ -61,8 +61,8 @@ public class PlayerBehaviour : MonoBehaviour
         canMove = true;
         controller = GetComponent<CharacterController>();
         meshRenderer = GetComponent<MeshRenderer>();
-        combatBehaviour = GetComponent<CombatBehaviour>();
-        health = combatBehaviour.health;
+        //combatBehaviour = GetComponent<CombatBehaviour>();
+        //health = combatBehaviour.health;
         
         meshRenderer.material.shaderKeywords = new[] {"_EMISSION"};
         
@@ -246,27 +246,27 @@ public class PlayerBehaviour : MonoBehaviour
     //     invincible = false;
     // }
 
-    public void IncreaseJumpCount(PowerUpData powerUpData)
-    {
-        jumpCountModifier += powerUpData.intValue;
-        StartCoroutine(DecreaseJumpCount(powerUpData));
-    }
-    private IEnumerator DecreaseJumpCount(PowerUpData powerUpData)
-    {
-        yield return new WaitForSeconds(powerUpData.time);
-        jumpCountModifier -= powerUpData.intValue;
-    }
-    
-    public void IncreaseMoveSpeed(PowerUpData powerUpData)
-    {
-        moveSpeedModifier += powerUpData.floatValue;
-        StartCoroutine(DecreaseMoveSpeed(powerUpData));
-    }
-    private IEnumerator DecreaseMoveSpeed(PowerUpData powerUpData)
-    {
-        yield return new WaitForSeconds(powerUpData.time);
-        moveSpeedModifier -= powerUpData.floatValue;
-    }
+    // public void IncreaseJumpCount(PowerUpData powerUpData)
+    // {
+    //     jumpCountModifier += powerUpData.intValue;
+    //     StartCoroutine(DecreaseJumpCount(powerUpData));
+    // }
+    // private IEnumerator DecreaseJumpCount(PowerUpData powerUpData)
+    // {
+    //     yield return new WaitForSeconds(powerUpData.time);
+    //     jumpCountModifier -= powerUpData.intValue;
+    // }
+    //
+    // public void IncreaseMoveSpeed(PowerUpData powerUpData)
+    // {
+    //     moveSpeedModifier += powerUpData.floatValue;
+    //     StartCoroutine(DecreaseMoveSpeed(powerUpData));
+    // }
+    // private IEnumerator DecreaseMoveSpeed(PowerUpData powerUpData)
+    // {
+    //     yield return new WaitForSeconds(powerUpData.time);
+    //     moveSpeedModifier -= powerUpData.floatValue;
+    // }
 
     public void AddForce(Vector3 force)
     {
