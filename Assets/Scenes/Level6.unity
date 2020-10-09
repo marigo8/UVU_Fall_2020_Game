@@ -1909,9 +1909,11 @@ MonoBehaviour:
   canMove: 1
   jumpCount: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
   sprintModifier: {fileID: 11400000, guid: fa8e9d3697f48ea499a9efc71cd46ccc, type: 2}
+  stamina: {fileID: 11400000, guid: a92d22fc87c92d54b8bea652cc638248, type: 2}
   moveSpeed: 6
   rotateSpeed: 15
   jumpForce: 6.4
+  staminaCooldownTime: 2
 --- !u!143 &1390875243
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2434,10 +2436,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1846502444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff1f0dea126941544afb91155efc05ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 3c428137be8a4a6439a60be82202590f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: c7a639d18b5ba124d82daeb9b0e4a37b, type: 2}
+  data: {fileID: 11400000, guid: a92d22fc87c92d54b8bea652cc638248, type: 2}
 --- !u!114 &1846502447
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,16 +10,17 @@ public class CharacterMover : MonoBehaviour
     public bool canMove;
     
     [SerializeField] private IntData jumpCount;
-    [SerializeField] private FloatData sprintModifier;
-    [SerializeField] private float moveSpeed, rotateSpeed, jumpForce;
+    [SerializeField] private FloatData sprintModifier, stamina;
+    [SerializeField] private float moveSpeed, rotateSpeed, jumpForce, staminaCooldownTime;
     
-    private bool leavingGround;
+    private bool leavingGround, canSprint = true, staminaCoolingDown;
     private float yVar;
     private Vector3 movement, addedForce;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        stamina.SetValueToMax();
     }
     private void Update()
     {
@@ -72,10 +73,7 @@ public class CharacterMover : MonoBehaviour
             transform.rotation = rot;
         }
 
-        if (Input.GetButton("Sprint"))
-        {
-            movement *= sprintModifier.value;
-        }
+        Sprint();
 
         Jump();
 
@@ -84,6 +82,24 @@ public class CharacterMover : MonoBehaviour
         AdditionalForce();
 
         controller.Move(movement * Time.deltaTime);
+    }
+
+    private void Sprint()
+    {
+        if (Input.GetButton("Sprint") && canSprint)
+        {
+            movement *= sprintModifier.value;
+            stamina.AddToValue(-Time.deltaTime);
+            if (stamina.value <= 0)
+            {
+                StartCoroutine(StaminaCooldown());
+            }
+        }
+        else if(!staminaCoolingDown)
+        {
+            stamina.AddToValue(Time.deltaTime);
+        }
+        
     }
     private void Jump()
     {
@@ -111,5 +127,15 @@ public class CharacterMover : MonoBehaviour
     public void AddForce(Vector3 force)
     {
         addedForce += force;
+    }
+
+    private IEnumerator StaminaCooldown()
+    {
+        staminaCoolingDown = true;
+        canSprint = false;
+        yield return new WaitForSeconds(staminaCooldownTime);
+
+        staminaCoolingDown = false;
+        canSprint = true;
     }
 }
