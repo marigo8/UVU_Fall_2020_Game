@@ -45,13 +45,6 @@ public class IntData : ScriptableObject
     {
         if (!useClamp) return;
 
-        if (value < 0)
-        {
-            value = 0;
-        }
-        else if (value > maxValue)
-        {
-            SetValueToMax();
-        }
+        value = Mathf.Clamp(value, 0, maxValue);
     }
 }

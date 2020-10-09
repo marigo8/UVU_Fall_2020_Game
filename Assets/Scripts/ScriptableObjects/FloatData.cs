@@ -44,13 +44,6 @@ public class FloatData : ScriptableObject
     {
         if (!useClamp) return;
 
-        if (value < 0f)
-        {
-            value = 0f;
-        }
-        else if (value > maxValue)
-        {
-            SetValueToMax();
-        }
+        value = Mathf.Clamp(value, 0, maxValue);
     }
 }
