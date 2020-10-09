@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class IntData : ScriptableObject
+public class IntData : ScriptableData
 {
     public string label;
     public int value;
@@ -48,7 +48,7 @@ public class IntData : ScriptableObject
         value = Mathf.Clamp(value, 0, maxValue);
     }
 
-    public string GetString()
+    public override string GetString()
     {
         var text = label + ": " + value;
         if (useClamp)

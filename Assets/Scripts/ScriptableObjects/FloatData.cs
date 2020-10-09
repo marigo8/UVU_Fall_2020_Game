@@ -2,7 +2,7 @@
 using UnityEngine.Events;
 
 [CreateAssetMenu]
-public class FloatData : ScriptableObject
+public class FloatData : ScriptableData
 {
     public string label;
     public float value;
@@ -47,7 +47,7 @@ public class FloatData : ScriptableObject
         value = Mathf.Clamp(value, 0, maxValue);
     }
 
-    public string GetString()
+    public override string GetString()
     {
         var text = label + ": " + value.ToString("F1");
         if (useClamp)
