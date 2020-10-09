@@ -42,4 +42,10 @@ public class Vector3Data : ScriptableObject
         Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hit);
         value = hit.point;
     }
+
+    public string GetString()
+    {
+        var text = label + ": " + value;
+        return text;
+    }
 }

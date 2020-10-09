@@ -8,7 +8,6 @@ using UnityEngine.UI;
 public class FloatDataHudBehaviour : MonoBehaviour
 {
     public FloatData data;
-    public int decimalPlaces;
     private Text textObj;
 
     private void Start()
@@ -18,12 +17,6 @@ public class FloatDataHudBehaviour : MonoBehaviour
 
     private void Update()
     {
-        var text = data.label + ": " + data.value.ToString("F"+decimalPlaces);
-        if (data.useClamp)
-        {
-            text += " / " + data.maxValue.ToString("F"+decimalPlaces);
-        }
-        
-        textObj.text = text;
+        textObj.text = data.GetString();
     }
 }

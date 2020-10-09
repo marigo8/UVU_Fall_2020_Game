@@ -17,9 +17,8 @@ public class Vector3HudBehaviour : MonoBehaviour
 
     private void Update()
     {
-        var text = data.label + ": " + data.value;
         
-        textObj.text = text;
+        textObj.text = data.GetString();
     }
     
 }

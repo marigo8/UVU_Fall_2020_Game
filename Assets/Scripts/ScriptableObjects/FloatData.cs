@@ -46,4 +46,15 @@ public class FloatData : ScriptableObject
 
         value = Mathf.Clamp(value, 0, maxValue);
     }
+
+    public string GetString()
+    {
+        var text = label + ": " + value.ToString("F1");
+        if (useClamp)
+        {
+            text += " / " + maxValue.ToString("F1");
+        }
+
+        return text;
+    }
 }

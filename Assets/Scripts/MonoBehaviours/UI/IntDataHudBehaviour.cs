@@ -17,12 +17,6 @@ public class IntDataHudBehaviour : MonoBehaviour
 
     private void Update()
     {
-        var text = data.label + ": " + data.value;
-        if (data.useClamp)
-        {
-            text += " / " + data.maxValue;
-        }
-        
-        textObj.text = text;
+        textObj.text = data.GetString();
     }
 }

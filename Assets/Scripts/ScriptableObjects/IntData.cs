@@ -47,4 +47,15 @@ public class IntData : ScriptableObject
 
         value = Mathf.Clamp(value, 0, maxValue);
     }
+
+    public string GetString()
+    {
+        var text = label + ": " + value;
+        if (useClamp)
+        {
+            text += " / " + maxValue;
+        }
+
+        return text;
+    }
 }
