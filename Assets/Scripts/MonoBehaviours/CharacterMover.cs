@@ -90,9 +90,11 @@ public class CharacterMover : MonoBehaviour
         
         if (Input.GetButton("Sprint"))
         {
-            
-            movement *= sprintModifier.value;
-            stamina.AddToValue(-Time.deltaTime);
+            if (stamina.value > 0)
+            {
+                movement *= sprintModifier.value;
+                stamina.AddToValue(-Time.deltaTime);
+            }
         }
         else
         {
