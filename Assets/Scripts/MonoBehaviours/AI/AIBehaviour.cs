@@ -9,8 +9,9 @@ using UnityEngine.Serialization;
 public class AIBehaviour : MonoBehaviour
 {
     private NavMeshAgent agent;
-    public Transform target;
-    private bool canNavigate = true;
+    [FormerlySerializedAs("defaultTarget")] public Transform player;
+    private Transform target;
+    private bool canNavigate = true, playerInRange = false;
     private WaitForFixedUpdate wffu;
     public float holdTime = 1f;
     private WaitForSeconds wfs;
@@ -19,6 +20,7 @@ public class AIBehaviour : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         wfs = new WaitForSeconds(holdTime);
+        target = player;
     }
 
     private IEnumerator Navigate()
@@ -32,12 +34,20 @@ public class AIBehaviour : MonoBehaviour
             {
                 agent.destination = target.position;
             }
+            else if (playerInRange)
+            {
+                target = player;
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("EnemyTarget") && !other.CompareTag("Player")) return;
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
         target = other.transform;
         canNavigate = false;
         StartCoroutine(Navigate());
@@ -46,6 +56,10 @@ public class AIBehaviour : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("EnemyTarget") && !other.CompareTag("Player")) return;
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
         if (other.transform != target) return;
         canNavigate = false;
     }
