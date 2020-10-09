@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Text))]
 public class ScriptableDataHudBehaviour : MonoBehaviour
 {
-    public ScriptableData data;
+    public ScriptableData[] datas;
     private Text textObj;
 
     private void Start()
@@ -16,6 +16,12 @@ public class ScriptableDataHudBehaviour : MonoBehaviour
 
     private void Update()
     {
-        textObj.text = data.GetString();
+        var text = "";
+        foreach (var data in datas)
+        {
+            text += data.GetString() + "\n";
+        }
+
+        textObj.text = text;
     }
 }
