@@ -13,7 +13,7 @@ public class CharacterMover : MonoBehaviour
     [SerializeField] private FloatData sprintModifier, stamina;
     [SerializeField] private float moveSpeed, rotateSpeed, jumpForce, staminaCooldownTime;
     
-    private bool leavingGround, canSprint = true, staminaCoolingDown;
+    private bool leavingGround, canSprint = true;
     private float yVar;
     private Vector3 movement, addedForce;
 
@@ -86,17 +86,24 @@ public class CharacterMover : MonoBehaviour
 
     private void Sprint()
     {
-        if (Input.GetButton("Sprint") && canSprint)
+        if (!canSprint) return;
+        
+        if (Input.GetButton("Sprint"))
         {
+            
             movement *= sprintModifier.value;
             stamina.AddToValue(-Time.deltaTime);
-            if (stamina.value <= 0)
-            {
-                StartCoroutine(StaminaCooldown());
-            }
         }
-        else if(!staminaCoolingDown)
+        else
         {
+            if (Input.GetButtonUp("Sprint"))
+            {
+                if (stamina.value <= 0)
+                {
+                    StartCoroutine(StaminaCooldown());
+                    return;
+                }
+            }
             stamina.AddToValue(Time.deltaTime);
         }
         
@@ -131,11 +138,8 @@ public class CharacterMover : MonoBehaviour
 
     private IEnumerator StaminaCooldown()
     {
-        staminaCoolingDown = true;
         canSprint = false;
         yield return new WaitForSeconds(staminaCooldownTime);
-
-        staminaCoolingDown = false;
         canSprint = true;
     }
 }
