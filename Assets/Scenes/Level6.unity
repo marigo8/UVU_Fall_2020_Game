@@ -1662,7 +1662,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1202057447}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6014cb65eb4a66345ae099428b196926, type: 3}
+  m_Script: {fileID: 11500000, guid: 89e57626e2d2be14580db1345c8002aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 6700386826a5ae24aba055ea843b6dd8, type: 2}
@@ -2076,7 +2076,7 @@ GameObject:
   - component: {fileID: 1490872989}
   - component: {fileID: 1490872988}
   m_Layer: 5
-  m_Name: JumpCountText
+  m_Name: JumpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2110,7 +2110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1490872986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6014cb65eb4a66345ae099428b196926, type: 3}
+  m_Script: {fileID: 11500000, guid: 89e57626e2d2be14580db1345c8002aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
@@ -2402,7 +2402,7 @@ GameObject:
   - component: {fileID: 1846502447}
   - component: {fileID: 1846502446}
   m_Layer: 5
-  m_Name: SpawnPointText
+  m_Name: SprintText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2436,7 +2436,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1846502444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c428137be8a4a6439a60be82202590f, type: 3}
+  m_Script: {fileID: 11500000, guid: 89e57626e2d2be14580db1345c8002aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: a92d22fc87c92d54b8bea652cc638248, type: 2}
@@ -2473,7 +2473,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Spawn Text
+  m_Text: 'Sprint Text
+
+'
 --- !u!222 &1846502448
 CanvasRenderer:
   m_ObjectHideFlags: 0
