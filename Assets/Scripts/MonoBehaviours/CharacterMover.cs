@@ -110,6 +110,7 @@ public class CharacterMover : MonoBehaviour
     }
     private void Jump()
     {
+        if (stamina.value <= 0) return;
         if (Input.GetButtonDown("Jump") && jumpCount.value < jumpCount.maxValue)
         {
             yVar = jumpForce;

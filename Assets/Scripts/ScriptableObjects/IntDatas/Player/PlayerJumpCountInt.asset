@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerJumpCountInt
   m_EditorClassIdentifier: 
   label: Jump Count
-  useClamp: 1
   value: 0
   maxValue: 2
+  useClamp: 1
