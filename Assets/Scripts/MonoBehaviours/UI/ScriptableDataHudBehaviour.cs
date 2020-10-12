@@ -21,7 +21,6 @@ public class ScriptableDataHudBehaviour : MonoBehaviour
         {
             text += data.GetString() + "\n";
         }
-
         textObj.text = text;
     }
 }
