@@ -9,13 +9,14 @@ public class CharacterMover : MonoBehaviour
     
     public bool canMove;
     
-    [SerializeField] private IntData jumpCount;
-    [SerializeField] private FloatData sprintModifier, stamina;
-    [SerializeField] private float moveSpeed, rotateSpeed, jumpForce, staminaCooldownTime;
+    public IntData jumpCount;
+    public FloatData stamina, sprintModifier, slowModifier;
+    public float moveSpeed, rotateSpeed, jumpForce, staminaCooldownTime;
     
-    private bool leavingGround, canSprint = true;
-    private float yVar;
+    private bool leavingGround, canSprint = true, staminaCoolingDown;
+    private float speedModifier = 1f, yVar;
     private Vector3 movement, addedForce;
+    private Coroutine sprintCoroutine;
 
     private void Start()
     {
@@ -65,7 +66,7 @@ public class CharacterMover : MonoBehaviour
             vInput = Input.GetAxis("Vertical");
         }
         movement.Set(hInput, 0, vInput);
-        movement = Vector3.ClampMagnitude(movement, 1f) * moveSpeed;
+        movement = Vector3.ClampMagnitude(movement, 1f) * (moveSpeed * speedModifier);
         
         if (movement != Vector3.zero)
         {
@@ -73,7 +74,14 @@ public class CharacterMover : MonoBehaviour
             transform.rotation = rot;
         }
 
-        Sprint();
+        if (Input.GetButtonDown("Sprint") && !staminaCoolingDown)
+        {
+            if (sprintCoroutine != null) // if a coroutine is already running...
+            {
+                StopCoroutine(sprintCoroutine); // stop coroutine
+            }
+            sprintCoroutine = StartCoroutine(Sprint()); // start coroutine
+        }
 
         Jump();
 
@@ -83,36 +91,48 @@ public class CharacterMover : MonoBehaviour
 
         controller.Move(movement * Time.deltaTime);
     }
-
-    private void Sprint()
+    
+    private IEnumerator Sprint()
     {
-        if (!canSprint) return;
+        // Sprinting Speed
+        speedModifier = sprintModifier.value;
         
-        if (Input.GetButton("Sprint"))
+        // Deplete Stamina
+        while (Input.GetButton("Sprint") && stamina.value > 0)
         {
-            if (stamina.value > 0)
-            {
-                movement *= sprintModifier.value;
-                stamina.AddToValue(-Time.deltaTime);
-            }
+            stamina.AddToValue(-Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+        
+        // Stop Sprinting
+        if (stamina.value > 0)
+        {
+            // Regular Speed
+            speedModifier = 1f;
+            yield return new WaitForSeconds(.5f);
         }
         else
         {
-            if (Input.GetButtonUp("Sprint"))
-            {
-                if (stamina.value <= 0)
-                {
-                    StartCoroutine(StaminaCooldown());
-                    return;
-                }
-            }
-            stamina.AddToValue(Time.deltaTime);
+            // Slow Speed
+            staminaCoolingDown = true;
+            speedModifier = slowModifier.value;
+            yield return new WaitForSeconds(1);
         }
         
+        // Regenerate Stamina
+        while (!stamina.IsMaxed)
+        {
+            stamina.AddToValue(Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+        
+        // End
+        speedModifier = 1f;
+        staminaCoolingDown = false;
     }
+    
     private void Jump()
     {
-        //if (stamina.value <= 0) return;
         if (Input.GetButtonDown("Jump") && jumpCount.value < jumpCount.maxValue)
         {
             yVar = jumpForce;
