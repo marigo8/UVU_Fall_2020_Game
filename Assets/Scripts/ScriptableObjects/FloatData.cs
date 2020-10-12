@@ -57,4 +57,16 @@ public class FloatData : ScriptableData
 
         return text;
     }
+
+    public void SetValueFromRotationY(Transform transformObj)
+    {
+        value = transformObj.eulerAngles.y;
+    }
+
+    public void SetRotationYFromValue(Transform transformObj)
+    {
+        var rotation = transformObj.eulerAngles;
+        rotation.y = value;
+        transformObj.eulerAngles = rotation;
+    }
 }

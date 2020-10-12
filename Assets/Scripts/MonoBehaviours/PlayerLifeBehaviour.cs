@@ -7,9 +7,10 @@ public class PlayerLifeBehaviour : MonoBehaviour
 {
     public UnityEvent respawnEvent, deathEvent;
     
-    [SerializeField] private float respawnTime, invincibleTime;
-    [SerializeField] private IntData health;
-    [SerializeField] private Vector3Data spawnPoint, spawnDirection;
+    public float respawnTime, invincibleTime;
+    public IntData health;
+    public FloatData spawnDirection;
+    public Vector3Data spawnPoint;
 
     private CharacterController controller;
     private MeshRenderer meshRenderer;
@@ -51,7 +52,7 @@ public class PlayerLifeBehaviour : MonoBehaviour
         yield return new WaitForSeconds(respawnTime);
         
         spawnPoint.SetPositionFromValue(transform);
-        spawnDirection.SetRotationFromValue(transform);
+        spawnDirection.SetRotationYFromValue(transform);
         
         dead = false;
         SetActive(true);

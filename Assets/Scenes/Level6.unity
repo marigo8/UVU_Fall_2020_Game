@@ -614,9 +614,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: d39bf8fbfb9b69a458684bdd31063a87, type: 2}
-        m_TargetAssemblyTypeName: Vector3Data, Assembly-CSharp
-        m_MethodName: SetValueFromRotation
+      - m_Target: {fileID: 11400000, guid: feca7ae01c2c9164e85a56b5c4e6ed0e, type: 2}
+        m_TargetAssemblyTypeName: FloatData, Assembly-CSharp
+        m_MethodName: SetValueFromRotationY
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 245369884}
@@ -701,13 +701,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245369879}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.5918022, z: 0, w: 0.80608326}
   m_LocalPosition: {x: -3.15, y: 1, z: 7.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -72.57, z: 0}
 --- !u!1 &275296100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,9 +1201,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 11400000, guid: d39bf8fbfb9b69a458684bdd31063a87, type: 2}
-        m_TargetAssemblyTypeName: Vector3Data, Assembly-CSharp
-        m_MethodName: SetValueFromRotation
+      - m_Target: {fileID: 11400000, guid: feca7ae01c2c9164e85a56b5c4e6ed0e, type: 2}
+        m_TargetAssemblyTypeName: FloatData, Assembly-CSharp
+        m_MethodName: SetValueFromRotationY
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 941207083}
@@ -1288,13 +1288,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941207078}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 3.18, y: 1, z: -5.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!1 &992342120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1548,7 +1548,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1390875241}
-  holdTime: 0
 --- !u!195 &1189928068
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1913,8 +1912,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canMove: 1
   jumpCount: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
-  sprintModifier: {fileID: 11400000, guid: fa8e9d3697f48ea499a9efc71cd46ccc, type: 2}
   stamina: {fileID: 11400000, guid: a92d22fc87c92d54b8bea652cc638248, type: 2}
+  sprintModifier: {fileID: 11400000, guid: fa8e9d3697f48ea499a9efc71cd46ccc, type: 2}
+  slowModifier: {fileID: 11400000, guid: 81f4bd5a15b9fd54c8f1a0b1e2876984, type: 2}
   moveSpeed: 6
   rotateSpeed: 15
   jumpForce: 6.4
@@ -1970,8 +1970,8 @@ MonoBehaviour:
   respawnTime: 2
   invincibleTime: 1
   health: {fileID: 11400000, guid: 6700386826a5ae24aba055ea843b6dd8, type: 2}
+  spawnDirection: {fileID: 11400000, guid: feca7ae01c2c9164e85a56b5c4e6ed0e, type: 2}
   spawnPoint: {fileID: 11400000, guid: 4ba498ce24955034ab3eb6f721158fee, type: 2}
-  spawnDirection: {fileID: 11400000, guid: d39bf8fbfb9b69a458684bdd31063a87, type: 2}
 --- !u!1 &1441970494
 GameObject:
   m_ObjectHideFlags: 0
