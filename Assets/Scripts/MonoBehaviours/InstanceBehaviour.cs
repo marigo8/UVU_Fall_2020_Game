@@ -6,18 +6,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class InstanceBehaviour : MonoBehaviour
 {
-    // private Rigidbody rb;
-    // public Vector3 force;
-    //
-    // private void Start()
-    // {
-    //     rb = GetComponent<Rigidbody>();
-    //     var forceDirection = force;
-    //     rb.AddRelativeForce(forceDirection);
-    // }
-
+    public IntData count;
     public void CreateInstance(Transform transformObj)
     {
+        if (count != null)
+        {
+            if (count.value <= 0) return;
+            count.AddToValue(-1);
+        }
         Instantiate(gameObject, transformObj.position, transformObj.rotation);
     }
 }

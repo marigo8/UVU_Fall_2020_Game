@@ -8,20 +8,129 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIBehaviour : MonoBehaviour
 {
-    public AIActivity ai;
+    public float patrolWaitTime = 1f;
+    public Transform target;
+    public List<Transform> patrolPoints = new List<Transform>();
+    
+    private NavMeshAgent agent;
     private Coroutine aiCoroutine;
+    private int currentPatrolPoint;
+    
+    private readonly WaitForFixedUpdate fixedWait = new WaitForFixedUpdate();
+    private WaitForSeconds patrolWait;
+
 
     private void Start()
     {
-        if (ai == null) return;
-        ai.Initialize(GetComponent<NavMeshAgent>());
-        
+        agent = GetComponent<NavMeshAgent>();
+        patrolWait = new WaitForSeconds(patrolWaitTime);
+
+        StartAction(Patrol());
+    }
+    
+    
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (target == null || !target.CompareTag("Distraction")) // if there is no target OR the enemy is not distracted
+        {
+            if (other.CompareTag("Player") || other.CompareTag("Distraction"))
+            {
+                target = other.transform;
+                StartAction(ChaseTarget());
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.transform == target)
+        {
+            target = null;
+            StartAction(Patrol());
+        }
+    }
+
+    private void StartAction(IEnumerator coroutine)
+    {
         if (aiCoroutine != null) // if a coroutine is already running...
         {
             StopCoroutine(aiCoroutine); // stop coroutine
         }
-        aiCoroutine = StartCoroutine(ai.Activity()); // start coroutine
+        aiCoroutine = StartCoroutine(coroutine); // start coroutine
     }
+
+    private IEnumerator Patrol()
+    {
+        while (true)
+        {
+            Debug.Log(currentPatrolPoint);
+            if (agent.pathPending || !(agent.remainingDistance > 0.5f))
+            {
+                yield return patrolWait;
+                agent.destination = patrolPoints[currentPatrolPoint].position;
+                currentPatrolPoint = (currentPatrolPoint + 1) % patrolPoints.Count;
+            }
+
+
+            yield return fixedWait;
+        }
+    }
+
+    private IEnumerator ChaseTarget()
+    {
+        while (target != null)
+        {
+            agent.destination = target.position;
+            yield return fixedWait;
+        }
+        StartAction(Patrol());
+    }
+
+    private void OnDrawGizmos()
+    {
+        for (var i = 0; i < patrolPoints.Count; i++)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(patrolPoints[i].position, 0.5f);
+            Gizmos.DrawLine(patrolPoints[i].position, patrolPoints[(i + 1) % patrolPoints.Count].position);
+        }
+    }
+
+
+    // public bool isActive = true;
+    // public Transform target;
+    //
+    // public AIActivity actionObj;
+    // private Coroutine aiCoroutine;
+    //
+    // private void Start()
+    // {
+    //     if (actionObj == null) return;
+    //     actionObj.Initialize(GetComponent<NavMeshAgent>(), this);
+    //     
+    //     StartAction();
+    //     
+    // }
+    //
+    // public void SetTarget(Transform newTarget)
+    // {
+    //     
+    // }
+    //
+    // public void SetAction(AIActivity action)
+    // {
+    //     actionObj = action;
+    // }
+    //
+    // public void StartAction()
+    // {
+    //     if (aiCoroutine != null) // if a coroutine is already running...
+    //     {
+    //         StopCoroutine(aiCoroutine); // stop coroutine
+    //     }
+    //     aiCoroutine = StartCoroutine(actionObj.Activity()); // start coroutine
+    // }
 
 
     // private NavMeshAgent agent;
