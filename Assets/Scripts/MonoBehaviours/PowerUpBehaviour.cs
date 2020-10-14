@@ -29,6 +29,8 @@ public class PowerUpBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Player")) return;
+        
         StartCoroutine(ApplyEffect());
         StartCoroutine(Disable());
     }
@@ -42,14 +44,19 @@ public class PowerUpBehaviour : MonoBehaviour
 
     private IEnumerator Disable()
     {
-        meshRenderer.enabled = false;
-        col.enabled = false;
-        
-        if (!respawn) yield break;
+        if (respawn)
+        {
+            meshRenderer.enabled = false;
+            col.enabled = false;
 
-        yield return respawnWait;
+            yield return respawnWait;
 
-        meshRenderer.enabled = true;
-        col.enabled = true;
+            meshRenderer.enabled = true;
+            col.enabled = true;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

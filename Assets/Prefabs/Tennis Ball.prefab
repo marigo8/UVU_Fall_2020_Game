@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 3346897288580810434}
   - component: {fileID: 2135664141136126530}
   - component: {fileID: 2429639481423144734}
+  - component: {fileID: 8324244909810972492}
   - component: {fileID: -7406223569380521056}
   - component: {fileID: -7328314353290470529}
   - component: {fileID: -7389761040783069180}
+  - component: {fileID: 9013218296429807619}
   m_Layer: 0
   m_Name: Tennis Ball
   m_TagString: EnemyTarget
@@ -98,6 +100,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &8324244909810972492
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761485316954235961}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-7406223569380521056
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -139,4 +154,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: 0, y: 100, z: 1000}
-  lifeTime: 5
+  hasLifeTime: 0
+  lifeTime: 0
+--- !u!114 &9013218296429807619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1761485316954235961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5510ad5e45499064f90116d501084a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawn: 0
+  effectTime: 0
+  respawnTime: 0
+  use:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: d5c217bce469aa245a1b225e679ab540, type: 2}
+        m_TargetAssemblyTypeName: IntData, Assembly-CSharp
+        m_MethodName: AddToValue
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  reset:
+    m_PersistentCalls:
+      m_Calls: []

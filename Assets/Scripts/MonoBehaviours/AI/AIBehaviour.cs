@@ -8,37 +8,27 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIBehaviour : MonoBehaviour
 {
-    private NavMeshAgent agent;
-    public Transform player;
-    private bool canNav = true;
-    private WaitForFixedUpdate wffu = new WaitForFixedUpdate();
+    public AIActivity ai;
+    private Coroutine aiCoroutine;
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-    }
-
-    private IEnumerator OnTriggerEnter(Collider other)
-    {
-        canNav = true;
-        while (canNav)
+        if (ai == null) return;
+        ai.Initialize(GetComponent<NavMeshAgent>());
+        
+        if (aiCoroutine != null) // if a coroutine is already running...
         {
-            yield return new WaitForSeconds(2f);
-            agent.destination = player.position;
+            StopCoroutine(aiCoroutine); // stop coroutine
         }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        canNav = false;
+        aiCoroutine = StartCoroutine(ai.Activity()); // start coroutine
     }
 
 
     // private NavMeshAgent agent;
-    // [FormerlySerializedAs("defaultTarget")] public Transform player;
+    // public Transform player;
     // private Transform target;
     // private bool canNavigate = true, playerInRange = false;
-    // private WaitForFixedUpdate wffu;
+    // private readonly WaitForFixedUpdate wffu = new WaitForFixedUpdate();
     // public float holdTime = 1f;
     // private WaitForSeconds wfs;
     //
