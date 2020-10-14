@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerSprintFloat
   m_EditorClassIdentifier: 
   label: Sprint Modifier
-  useClamp: 0
-  value: 1.5
+  value: 2
   maxValue: 0
+  useClamp: 0

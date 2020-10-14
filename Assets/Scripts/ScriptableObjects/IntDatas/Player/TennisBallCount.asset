@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TennisBallCount
   m_EditorClassIdentifier: 
   label: Tennis Balls
-  value: 4
+  value: 10
   maxValue: 0
   useClamp: 0

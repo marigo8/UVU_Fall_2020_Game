@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PlayerStaminaFloat
   m_EditorClassIdentifier: 
   label: Stamina
-  value: 1.8286777
-  maxValue: 2
+  value: 5
+  maxValue: 5
   useClamp: 1
