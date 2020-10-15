@@ -256,7 +256,8 @@ MonoBehaviour:
   moveSpeed: 6
   rotateSpeed: 15
   jumpForce: 6.4
-  staminaCooldownTime: 2
+  staminaCooldownTime: 0.5
+  staminaReplenishTime: 3
 --- !u!114 &6650289279647398711
 MonoBehaviour:
   m_ObjectHideFlags: 0

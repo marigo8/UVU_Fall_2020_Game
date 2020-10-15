@@ -11,16 +11,20 @@ public class CharacterMover : MonoBehaviour
     
     public IntData jumpCount;
     public FloatData stamina, sprintModifier, slowModifier;
-    public float moveSpeed, rotateSpeed, jumpForce, staminaCooldownTime;
+    public float moveSpeed, rotateSpeed, jumpForce, staminaCooldownTime, staminaReplenishTime;
     
     private bool leavingGround, canSprint = true, staminaCoolingDown;
     private float speedModifier = 1f, yVar;
     private Vector3 movement, addedForce;
     private Coroutine sprintCoroutine;
+    
+    private WaitForFixedUpdate fixedWait = new WaitForFixedUpdate();
+    private WaitForSeconds cooldownWait;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        cooldownWait = new WaitForSeconds(staminaCooldownTime);
         stamina.SetValueToMax();
     }
     private void Update()
@@ -101,7 +105,7 @@ public class CharacterMover : MonoBehaviour
         while (Input.GetButton("Sprint") && stamina.value > 0)
         {
             stamina.AddToValue(-Time.fixedDeltaTime);
-            yield return new WaitForFixedUpdate();
+            yield return fixedWait;
         }
         
         // Stop Sprinting
@@ -109,23 +113,22 @@ public class CharacterMover : MonoBehaviour
         {
             // Regular Speed
             speedModifier = 1f;
-            yield return new WaitForSeconds(.5f);
+            yield return cooldownWait;
         }
         else
         {
             // Slow Speed
             staminaCoolingDown = true;
             speedModifier = slowModifier.value;
-            yield return new WaitForSeconds(1);
+            yield return cooldownWait;
         }
-        
+
         // Regenerate Stamina
         while (!stamina.IsMaxed)
         {
-            stamina.AddToValue(Time.fixedDeltaTime);
-            yield return new WaitForFixedUpdate();
+            stamina.AddToValue((stamina.maxValue / staminaReplenishTime) * Time.fixedDeltaTime);
+            yield return fixedWait;
         }
-        
         // End
         speedModifier = 1f;
         staminaCoolingDown = false;
@@ -157,12 +160,5 @@ public class CharacterMover : MonoBehaviour
     public void AddForce(Vector3 force)
     {
         addedForce += force;
-    }
-
-    private IEnumerator StaminaCooldown()
-    {
-        canSprint = false;
-        yield return new WaitForSeconds(staminaCooldownTime);
-        canSprint = true;
     }
 }

@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIBehaviour : MonoBehaviour
 {
-    public float patrolWaitTime = 1f;
+    public float patrolWaitTime = 1f, patrolSpeed, chaseSpeed;
     public Transform target;
     public List<Transform> patrolPoints = new List<Transform>();
     
@@ -62,6 +62,24 @@ public class AIBehaviour : MonoBehaviour
 
     private IEnumerator Patrol()
     {
+        if (patrolPoints.Count <= 0) yield break;
+        
+        agent.speed = patrolSpeed;
+        var closestPoint = 0;
+        var closestDistance = Vector3.Distance(transform.position, patrolPoints[closestPoint].position);
+        
+        for (var i = 1; i < patrolPoints.Count; i++)
+        {
+            var distance = Vector3.Distance(transform.position, patrolPoints[i].position);
+            if (distance < closestDistance)
+            {
+                closestPoint = i;
+                closestDistance = distance;
+            }
+        }
+
+        currentPatrolPoint = closestPoint;
+        
         while (true)
         {
             Debug.Log(currentPatrolPoint);
@@ -79,6 +97,7 @@ public class AIBehaviour : MonoBehaviour
 
     private IEnumerator ChaseTarget()
     {
+        agent.speed = chaseSpeed;
         while (target != null)
         {
             agent.destination = target.position;
