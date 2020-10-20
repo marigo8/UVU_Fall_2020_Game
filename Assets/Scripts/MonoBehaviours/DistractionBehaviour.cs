@@ -5,29 +5,27 @@ using UnityEngine;
 
 public class DistractionBehaviour : MonoBehaviour
 {
-    private Rigidbody rb;
-    
-    public Vector3 force;
+    public IntData count;
     public float life;
+    
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        var forceDirection = force;
-        rb.AddRelativeForce(forceDirection);
-    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("EnemyPickUp"))
         {
             life -= Time.fixedDeltaTime;
-            Debug.Log(Time.time);
+            Debug.Log(life);
 
             if (life <= 0)
             {
-                Destroy(gameObject);
+                Destroy(transform.parent.gameObject);
             }
+        }
+        else if (other.CompareTag("Player"))
+        {
+            count.AddToValue(1);
+            Destroy(transform.parent.gameObject);
         }
     }
 }

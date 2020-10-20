@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb7707b2c5b79a448ebb37dc6a34be6, type: 3}
-  m_Name: PlayerHealthInt
+  m_Script: {fileID: 11500000, guid: 40db3c09771343b4babfbc2fbdf08c4c, type: 3}
+  m_Name: Dialogue
   m_EditorClassIdentifier: 
-  label: Health
-  value: 6
-  maxValue: 6
-  startValue: 6
-  startMax: 6
-  useStartValues: 1
-  useClamp: 1
+  data:
+  - Welcome!
+  - What is your quest?
+  - What is your favorite color?
+  index: 0

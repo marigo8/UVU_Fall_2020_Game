@@ -82,7 +82,6 @@ public class AIBehaviour : MonoBehaviour
         
         while (true)
         {
-            Debug.Log(currentPatrolPoint);
             if (agent.pathPending || !(agent.remainingDistance > 0.5f))
             {
                 yield return patrolWait;

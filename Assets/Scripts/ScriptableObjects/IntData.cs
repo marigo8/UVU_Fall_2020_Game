@@ -6,9 +6,15 @@ using UnityEngine;
 public class IntData : ScriptableData
 {
     public string label;
-    public int value;
-    public int maxValue;
-    public bool useClamp;
+    public int value, maxValue, startValue, startMax;
+    public bool useStartValues, useClamp;
+
+    private void OnEnable()
+    {
+        if (!useStartValues) return;
+        value = startValue;
+        maxValue = startMax;
+    }
 
     public bool IsMaxed => value >= maxValue;
 

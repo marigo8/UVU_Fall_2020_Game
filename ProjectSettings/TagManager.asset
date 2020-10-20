@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Distraction
   - Enemy
+  - EnemyPickUp
   layers:
   - Default
   - TransparentFX

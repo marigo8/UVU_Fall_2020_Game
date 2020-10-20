@@ -15,4 +15,7 @@ MonoBehaviour:
   label: Jump Count
   value: 0
   maxValue: 2
+  startValue: 0
+  startMax: 2
+  useStartValues: 1
   useClamp: 1
