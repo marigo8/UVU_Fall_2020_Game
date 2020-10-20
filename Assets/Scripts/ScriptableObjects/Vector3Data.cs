@@ -4,8 +4,15 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Vector3Data : ScriptableData
 {
-    public string label;
-    public Vector3 value;
+    public Vector3 value, startingValue;
+    
+    protected virtual void OnEnable()
+    {
+        if (useStartingValue)
+        {
+            value = startingValue;
+        }
+    }
 
     public float X => value.x;
     public float Y => value.y;

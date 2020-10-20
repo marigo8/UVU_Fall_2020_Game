@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb7707b2c5b79a448ebb37dc6a34be6, type: 3}
+  m_Script: {fileID: 11500000, guid: 756e2b7f32fc1b34e8f5529f5ed50a68, type: 3}
   m_Name: PlayerHealthInt
   m_EditorClassIdentifier: 
   label: Health
-  value: 6
+  useStartingValue: 1
+  value: 5
+  startingValue: 6
   maxValue: 6
-  startValue: 6
-  startMax: 6
-  useStartValues: 1
-  useClamp: 1
+  startingMax: 6

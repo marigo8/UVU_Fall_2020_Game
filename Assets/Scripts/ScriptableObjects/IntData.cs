@@ -1,66 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu]
 public class IntData : ScriptableData
 {
-    public string label;
-    public int value, maxValue, startValue, startMax;
-    public bool useStartValues, useClamp;
+    public int value, startingValue;
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
-        if (!useStartValues) return;
-        value = startValue;
-        maxValue = startMax;
+        if (useStartingValue)
+        {
+            value = startingValue;
+        }
     }
 
-    public bool IsMaxed => value >= maxValue;
-
-    public void AddToValue(int amount)
+    public virtual void AddToValue(int amount)
     {
         value += amount;
-        ClampValue();
     }
 
-    public void SetValue(int amount)
+    public virtual void SetValue(int amount)
     {
         value = amount;
-        ClampValue();
-    }
-
-    public void AddToMaxValue(int amount)
-    {
-        maxValue += amount;
-        ClampValue();
-    }
-
-    public void SetMaxValue(int amount)
-    {
-        maxValue = amount;
-        ClampValue();
-    }
-
-    public void SetValueToMax()
-    {
-        value = maxValue;
-    }
-
-    private void ClampValue()
-    {
-        if (!useClamp) return;
-
-        value = Mathf.Clamp(value, 0, maxValue);
     }
 
     public override string GetString()
     {
         var text = label + ": " + value;
-        if (useClamp)
-        {
-            text += " / " + maxValue;
-        }
 
         return text;
     }
