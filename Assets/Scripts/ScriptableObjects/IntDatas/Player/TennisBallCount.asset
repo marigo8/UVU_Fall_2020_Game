@@ -15,4 +15,7 @@ MonoBehaviour:
   label: Tennis Balls
   useStartingValue: 1
   value: 0
-  startingValue: 3
+  maxValue: 0
+  startValue: 3
+  startMax: 0
+  useClamp: 0

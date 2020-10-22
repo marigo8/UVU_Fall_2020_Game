@@ -9,9 +9,8 @@ public class CharacterMover : MonoBehaviour
     
     public bool canMove;
     
-    public ClampedIntData jumpCount;
-    public FloatData sprintModifier, slowModifier;
-    public ClampedFloatData stamina;
+    public IntData jumpCount;
+    public FloatData sprintModifier, slowModifier, stamina;
     public float moveSpeed, rotateSpeed, jumpForce, staminaCooldownTime, staminaReplenishTime;
     
     private bool leavingGround, canSprint = true, staminaCoolingDown;
