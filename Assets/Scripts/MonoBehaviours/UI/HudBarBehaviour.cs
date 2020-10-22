@@ -9,10 +9,14 @@ public class HudBarBehaviour : MonoBehaviour
 {
     public ScriptableData data;
     public Gradient gradient;
+    public Image background;
+    public Gradient backgroundGradient;
     private Image imageObj;
+    private bool isBackgroundNull;
 
     private void Start()
     {
+        isBackgroundNull = background == null;
         imageObj = GetComponent<Image>();
     }
 
@@ -22,5 +26,9 @@ public class HudBarBehaviour : MonoBehaviour
 
         imageObj.fillAmount = fraction;
         imageObj.color = gradient.Evaluate(fraction);
+
+        if (isBackgroundNull) return;
+
+        background.color = backgroundGradient.Evaluate(fraction);
     }
 }
