@@ -11,4 +11,9 @@ public class ScriptableData : ScriptableObject
     {
         return "not implemented";
     }
+
+    public virtual float GetFraction()
+    {
+        return 1f;
+    }
 }

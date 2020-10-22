@@ -60,4 +60,11 @@ public class ClampedIntData : IntData
 
         return text;
     }
+
+    public override float GetFraction()
+    {
+        var fraction = (value * 1f) / maxValue;
+
+        return fraction;
+    }
 }
