@@ -2894,6 +2894,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 323434197, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
+      propertyPath: m_Radius
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 323434197, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
+      propertyPath: m_Center.z
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6650289277961169270, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6650289279647398706, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

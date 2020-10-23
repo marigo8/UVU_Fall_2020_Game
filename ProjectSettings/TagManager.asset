@@ -24,7 +24,7 @@ TagManager:
   - SpawnPoint
   - Pushable
   - ItemPhysics
-  - 
+  - Pusher
   - 
   - 
   - 

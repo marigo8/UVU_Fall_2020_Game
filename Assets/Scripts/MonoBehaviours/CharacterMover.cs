@@ -13,7 +13,7 @@ public class CharacterMover : MonoBehaviour
     public FloatData sprintModifier, slowModifier, stamina;
     public float moveSpeed, rotateSpeed, jumpForce, staminaCooldownTime, staminaReplenishTime;
     
-    private bool leavingGround, canSprint = true, staminaCoolingDown;
+    private bool leavingGround, canSprint = true, staminaCoolingDown, jumpButtonDown, sprintButtonDown;
     private float speedModifier = 1f, yVar;
     private Vector3 movement, addedForce;
     private Coroutine sprintCoroutine;
@@ -27,12 +27,25 @@ public class CharacterMover : MonoBehaviour
         cooldownWait = new WaitForSeconds(staminaCooldownTime);
         stamina.SetValueToMax();
     }
-    private void Update()
+    private void FixedUpdate()
     {
         GroundCheck();
         if (canMove)
         {
             Movement();
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            jumpButtonDown = true;
+        }
+
+        if (Input.GetButtonDown("Sprint"))
+        {
+            sprintButtonDown = true;
         }
     }
 
@@ -57,7 +70,7 @@ public class CharacterMover : MonoBehaviour
                     yVar = 0;
                 }
             }
-            yVar += Physics.gravity.y * Time.deltaTime;
+            yVar += Physics.gravity.y * Time.fixedDeltaTime;
         }
     }
     private void Movement()
@@ -74,17 +87,23 @@ public class CharacterMover : MonoBehaviour
         
         if (movement != Vector3.zero)
         {
-            var rot = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(movement.normalized),rotateSpeed*Time.deltaTime);
+            var rot = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(movement.normalized),rotateSpeed*Time.fixedDeltaTime);
             transform.rotation = rot;
         }
 
-        if (Input.GetButtonDown("Sprint") && !staminaCoolingDown)
+        if (sprintButtonDown)
         {
-            if (sprintCoroutine != null) // if a coroutine is already running...
+            sprintButtonDown = false;
+            
+            if (!staminaCoolingDown)
             {
-                StopCoroutine(sprintCoroutine); // stop coroutine
+                if (sprintCoroutine != null) // if a coroutine is already running...
+                {
+                    StopCoroutine(sprintCoroutine); // stop coroutine
+                }
+
+                sprintCoroutine = StartCoroutine(Sprint()); // start coroutine
             }
-            sprintCoroutine = StartCoroutine(Sprint()); // start coroutine
         }
 
         Jump();
@@ -93,7 +112,7 @@ public class CharacterMover : MonoBehaviour
         
         AdditionalForce();
 
-        controller.Move(movement * Time.deltaTime);
+        controller.Move(movement * Time.fixedDeltaTime);
     }
     
     private IEnumerator Sprint()
@@ -136,16 +155,19 @@ public class CharacterMover : MonoBehaviour
     
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && jumpCount.value < jumpCount.maxValue)
-        {
-            yVar = jumpForce;
-            jumpCount.AddToValue(1);
-        }
+        if (!jumpButtonDown) return;
+        
+        jumpButtonDown = false;
+        
+        if (jumpCount.value >= jumpCount.maxValue) return;
+        
+        yVar = jumpForce;
+        jumpCount.AddToValue(1);
     }
 
     private void AdditionalForce()
     {
-        addedForce = Vector3.Lerp(addedForce, Vector3.zero, 5 * Time.deltaTime);
+        addedForce = Vector3.Lerp(addedForce, Vector3.zero, 5 * Time.fixedDeltaTime);
         if (addedForce.magnitude <0.01f)
         {
             addedForce = Vector3.zero;
