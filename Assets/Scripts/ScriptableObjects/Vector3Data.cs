@@ -1,5 +1,4 @@
-﻿using UnityEditor.PackageManager;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu]
 public class Vector3Data : ScriptableData
@@ -14,9 +13,9 @@ public class Vector3Data : ScriptableData
         }
     }
 
-    public float X => value.x;
-    public float Y => value.y;
-    public float Z => value.z;
+    public float x => value.x;
+    public float y => value.y;
+    public float z => value.z;
 
     public void SetValueFromVector3(Vector3 vector3)
     {

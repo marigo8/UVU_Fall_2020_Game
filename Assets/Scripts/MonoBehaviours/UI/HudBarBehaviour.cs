@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
 public class HudBarBehaviour : MonoBehaviour
 {
     public ScriptableData data;
-    public Gradient gradient;
     public Image background;
-    public Gradient backgroundGradient;
+    public Gradient gradient,backgroundGradient;
+    
     private Image imageObj;
     private bool isBackgroundNull;
 

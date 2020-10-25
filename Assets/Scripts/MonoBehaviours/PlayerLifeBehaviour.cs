@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class PlayerLifeBehaviour : MonoBehaviour
 {
-    public UnityEvent respawnEvent, deathEvent;
-    
     public float respawnTime, invincibleTime;
     public IntData health;
     public FloatData spawnDirection;
     public Vector3Data spawnPoint;
+    
+    public UnityEvent respawnEvent, deathEvent;
 
     private CharacterController controller;
     private MeshRenderer meshRenderer;
@@ -83,17 +82,4 @@ public class PlayerLifeBehaviour : MonoBehaviour
         meshRenderer.material.SetColor(EmissionColor,Color.black * Mathf.LinearToGammaSpace(10f));
         invincible = false;
     }
-
-    // private void OnControllerColliderHit(ControllerColliderHit hit)
-    // {
-    //     if (hit.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-    //     {
-    //         TakeDamage(1);
-    //         var knockback = hit.gameObject.GetComponent<CharacterKnockbackBehaviour>();
-    //         if (knockback != null)
-    //         {
-    //             knockback.Knockback(controller);
-    //         }
-    //     }
-    // }
 }

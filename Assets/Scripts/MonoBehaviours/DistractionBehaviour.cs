@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DistractionBehaviour : MonoBehaviour
 {
     public IntData count;
     public float life;
     
-
-
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("EnemyPickUp"))
         {
             life -= Time.fixedDeltaTime;
-            Debug.Log(life);
 
             if (life <= 0)
             {

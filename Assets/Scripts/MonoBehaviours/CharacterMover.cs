@@ -1,24 +1,21 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class CharacterMover : MonoBehaviour
 {
-    private CharacterController controller;
-    
     public bool canMove;
-    
     public IntData jumpCount;
     public FloatData sprintModifier, slowModifier, stamina;
     public float moveSpeed, rotateSpeed, jumpForce, staminaCooldownTime, staminaReplenishTime;
     
-    private bool leavingGround, canSprint = true, staminaCoolingDown, jumpButtonDown, sprintButtonDown;
+    private bool leavingGround, staminaCoolingDown, jumpButtonDown, sprintButtonDown;
     private float speedModifier = 1f, yVar;
     private Vector3 movement, addedForce;
-    private Coroutine sprintCoroutine;
+    private CharacterController controller;
     
-    private WaitForFixedUpdate fixedWait = new WaitForFixedUpdate();
+    private Coroutine sprintCoroutine;
+    private readonly WaitForFixedUpdate fixedWait = new WaitForFixedUpdate();
     private WaitForSeconds cooldownWait;
 
     private void Start()
@@ -57,7 +54,6 @@ public class CharacterMover : MonoBehaviour
     {
         if (controller.isGrounded && yVar <= 0)
         {
-            //yVar = -1f;
             jumpCount.value = 0;
             leavingGround = true;
         }

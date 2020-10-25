@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LookAtBehaviour : MonoBehaviour
 {
-    [SerializeField] private Vector3Data target;
-    [SerializeField] private bool lockX, lockY;
+    public Vector3Data target;
+    public bool lockX, lockY;
 
     public void LookAtTarget()
     {

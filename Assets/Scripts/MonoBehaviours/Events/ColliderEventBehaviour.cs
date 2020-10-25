@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
-
-[System.Serializable]
-public class TriggerEventClass : UnityEvent<Collider> {}
 
 public class ColliderEventBehaviour : MonoBehaviour
 {
-    public TriggerEventClass enterEvent;
-    public TriggerEventClass stayEvent;
-    public TriggerEventClass exitEvent;
+    public UnityEvent<Collider> enterEvent;
+    public UnityEvent<Collider> stayEvent;
+    public UnityEvent<Collider> exitEvent;
 
     private void OnTriggerEnter(Collider other)
     {
