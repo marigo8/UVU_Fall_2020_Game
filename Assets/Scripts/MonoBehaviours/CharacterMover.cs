@@ -27,10 +27,6 @@ public class CharacterMover : MonoBehaviour
     private void FixedUpdate()
     {
         GroundCheck();
-        if (canMove)
-        {
-            Movement();
-        }
     }
 
     private void Update()
@@ -43,6 +39,10 @@ public class CharacterMover : MonoBehaviour
         if (Input.GetButtonDown("Sprint"))
         {
             sprintButtonDown = true;
+        }
+        if (canMove)
+        {
+            Movement();
         }
     }
 
@@ -83,7 +83,7 @@ public class CharacterMover : MonoBehaviour
         
         if (movement != Vector3.zero)
         {
-            var rot = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(movement.normalized),rotateSpeed*Time.fixedDeltaTime);
+            var rot = Quaternion.Lerp(transform.rotation,Quaternion.LookRotation(movement.normalized),rotateSpeed*Time.deltaTime);
             transform.rotation = rot;
         }
 
@@ -108,7 +108,7 @@ public class CharacterMover : MonoBehaviour
         
         AdditionalForce();
 
-        controller.Move(movement * Time.fixedDeltaTime);
+        controller.Move(movement * Time.deltaTime);
     }
     
     private IEnumerator Sprint()

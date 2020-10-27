@@ -43,8 +43,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.64
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.25
+  m_Center: {x: 0, y: 0, z: 0.4}
 --- !u!54 &323434196
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -74,7 +74,7 @@ GameObject:
   m_Layer: 8
   m_Name: Fire Point
   m_TagString: Untagged
-  m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -331,6 +331,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf60ce871cee4534e9ec8c24916f7282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnTime: 2
+  invincibleTime: 1
+  health: {fileID: 11400000, guid: 6700386826a5ae24aba055ea843b6dd8, type: 2}
+  spawnDirection: {fileID: 11400000, guid: feca7ae01c2c9164e85a56b5c4e6ed0e, type: 2}
+  spawnPoint: {fileID: 11400000, guid: 4ba498ce24955034ab3eb6f721158fee, type: 2}
   respawnEvent:
     m_PersistentCalls:
       m_Calls:
@@ -349,8 +354,3 @@ MonoBehaviour:
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
-  respawnTime: 2
-  invincibleTime: 1
-  health: {fileID: 11400000, guid: 6700386826a5ae24aba055ea843b6dd8, type: 2}
-  spawnDirection: {fileID: 11400000, guid: feca7ae01c2c9164e85a56b5c4e6ed0e, type: 2}
-  spawnPoint: {fileID: 11400000, guid: 4ba498ce24955034ab3eb6f721158fee, type: 2}
