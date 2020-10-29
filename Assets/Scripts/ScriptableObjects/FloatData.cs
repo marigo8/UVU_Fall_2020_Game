@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 [CreateAssetMenu]
 public class FloatData : ScriptableData
@@ -7,6 +8,8 @@ public class FloatData : ScriptableData
     public bool useClamp;
 
     public bool IsMaxed => value >= maxValue;
+
+    public UnityEvent zeroEvent;
     
     private void OnEnable()
     {
@@ -51,6 +54,19 @@ public class FloatData : ScriptableData
         value = Mathf.Clamp(value, 0, maxValue);
     }
 
+    public void SetValueFromRotationY(Transform transformObj)
+    {
+        value = transformObj.eulerAngles.y;
+        ClampValue();
+    }
+
+    public void SetRotationYFromValue(Transform transformObj)
+    {
+        var rotation = transformObj.eulerAngles;
+        rotation.y = value;
+        transformObj.eulerAngles = rotation;
+    }
+
     public override string GetString()
     {
         var text = label + ": " + value.ToString("F1");
@@ -64,20 +80,6 @@ public class FloatData : ScriptableData
 
     public override float GetFraction()
     {
-        var fraction = value / maxValue;
-
-        return fraction;
-    }
-
-    public void SetValueFromRotationY(Transform transformObj)
-    {
-        value = transformObj.eulerAngles.y;
-    }
-
-    public void SetRotationYFromValue(Transform transformObj)
-    {
-        var rotation = transformObj.eulerAngles;
-        rotation.y = value;
-        transformObj.eulerAngles = rotation;
+        return value / maxValue;
     }
 }

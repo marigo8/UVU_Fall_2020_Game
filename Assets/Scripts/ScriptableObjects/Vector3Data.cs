@@ -4,6 +4,10 @@
 public class Vector3Data : ScriptableData
 {
     public Vector3 value, startingValue;
+
+    public float x => value.x;
+    public float y => value.y;
+    public float z => value.z;
     
     protected virtual void OnEnable()
     {
@@ -12,10 +16,6 @@ public class Vector3Data : ScriptableData
             value = startingValue;
         }
     }
-
-    public float x => value.x;
-    public float y => value.y;
-    public float z => value.z;
 
     public void SetValueFromVector3(Vector3 vector3)
     {
