@@ -347,21 +347,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6650289279647398706, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6650289279647398706, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6650289279647398718, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6650289279647398718, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
-      propertyPath: m_Icon
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
@@ -1547,7 +1535,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Press E near an NPC
 --- !u!222 &1890148254
 CanvasRenderer:
   m_ObjectHideFlags: 0

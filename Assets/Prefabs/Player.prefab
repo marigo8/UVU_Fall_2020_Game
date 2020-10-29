@@ -309,16 +309,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ef52bec84e16748bab442801eb381b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canMove: 1
   jumpCount: {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
-  sprintModifier: {fileID: 11400000, guid: fa8e9d3697f48ea499a9efc71cd46ccc, type: 2}
-  slowModifier: {fileID: 11400000, guid: 81f4bd5a15b9fd54c8f1a0b1e2876984, type: 2}
   stamina: {fileID: 11400000, guid: 61900e607cc9a2d47b5fc069dee89e9c, type: 2}
+  characterState: {fileID: 11400000, guid: 50b082b4e0c467342b2e635fba67618c, type: 2}
   moveSpeed: 6
-  rotateSpeed: 15
-  jumpForce: 6.4
-  staminaCooldownTime: 0.5
-  staminaReplenishTime: 3
+  sprintModifier: 2
+  slowModifier: 0.5
+  jumpStrength: 8
+  tempClimbStrength: 0
+  godMode: 0
 --- !u!114 &6650289279647398711
 MonoBehaviour:
   m_ObjectHideFlags: 0

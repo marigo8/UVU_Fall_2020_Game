@@ -13,7 +13,7 @@ public class PlayerLifeBehaviour : MonoBehaviour
 
     private CharacterController controller;
     private MeshRenderer meshRenderer;
-    private CharacterMover mover;
+    private PlayerMoveBehaviour mover;
     private bool dead, invincible = false;
     private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
@@ -28,7 +28,7 @@ public class PlayerLifeBehaviour : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         meshRenderer = GetComponent<MeshRenderer>();
-        mover = GetComponent<CharacterMover>();
+        mover = GetComponent<PlayerMoveBehaviour>();
         respawnEvent.Invoke();
         
         meshRenderer.material.shaderKeywords = new[] {"_EMISSION"};
