@@ -1,58 +1,46 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(Rigidbody))]
 public class LerpBehaviour : MonoBehaviour
 {
-    public Vector3 relativeDestination;
-    public float moveTime, waitTime;
-    private bool moving = true, movingForwards = true;
-    private float elapsedTime;
-    private Vector3 pointA, pointB;
+    public Transform pointBTransform;
+    public float moveTime, loopWaitTime;
+    public bool loopOnStart;
 
-    private void Start()
+    private bool goToPointA, moving;
+    private Vector3 pointA, pointB, currentPosition;
+
+    private Coroutine currentCoroutine;
+
+    private readonly WaitForFixedUpdate fixedWait = new WaitForFixedUpdate();
+    private WaitForSeconds loopWait;
+
+    public void Move(bool loop)
     {
-        pointA = transform.position;
-        pointB = transform.position + relativeDestination;
-    }
-    private void FixedUpdate()
-    {
-        elapsedTime += Time.fixedDeltaTime;
-        if (moving)
-        {
-            var step = elapsedTime / moveTime;
-            
-            if (step >= 1)
-            {
-                moving = false;
-                movingForwards = !movingForwards;
-                elapsedTime = 0;
-                return;
-            }
-        
-            if (movingForwards)
-            {
-                transform.position = Vector3.Lerp(pointA, pointB, step);
-            }
-            else
-            {
-                transform.position = Vector3.Lerp(pointB, pointA, step);
-            }
-        }
-        else
-        {
-            if (elapsedTime >= waitTime)
-            {
-                moving = true;
-                elapsedTime = 0;
-            }
-        }
+        if (moving) return;
+        currentCoroutine = StartCoroutine(MoveCoroutine(loop));
     }
 
-    private void OnDrawGizmosSelected()
+    public void MoveToA(bool loop)
     {
-        Gizmos.DrawWireCube(transform.position + relativeDestination, transform.localScale);
-        Gizmos.DrawLine(transform.position, transform.position + relativeDestination);
+        goToPointA = true;
+        Move(loop);
+    }
+
+    public void MoveToB(bool loop)
+    {
+        goToPointA = false;
+        Move(loop);
+    }
+
+    public void Stop()
+    {
+        if (!moving) return;
+        StopCoroutine(currentCoroutine);
+        moving = false;
     }
 
     public void SetColliderParent(Collider other)
@@ -63,5 +51,66 @@ public class LerpBehaviour : MonoBehaviour
     public void ClearColliderParent(Collider other)
     {
         other.transform.parent = null;
+    }
+
+    private void Start()
+    {
+        pointA = transform.position;
+        pointB = pointBTransform.position;
+        currentPosition = transform.position;
+        
+        loopWait = new WaitForSeconds(loopWaitTime);
+        
+        if (loopOnStart)
+        {
+            Move(true);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        transform.position = currentPosition;
+        // For some reason, the player doesn't move with the platform unless I set the transform in a FixedUpdate like this. No idea why. ¯\_(:/)_/¯
+    }
+
+    private IEnumerator MoveCoroutine(bool loop)
+    {
+        moving = true;
+        var startingPoint = pointA;
+        var endingPoint = pointB;
+        if (goToPointA)
+        {
+            startingPoint = pointB;
+            endingPoint = pointA;
+        }
+
+        var abDistance = Vector3.Distance(startingPoint, endingPoint);
+        var currentDistance = Vector3.Distance(transform.position, startingPoint);
+        var progress = currentDistance / abDistance;
+        progress *= moveTime;
+        
+        for (var i = progress; i < moveTime; i += Time.fixedDeltaTime)
+        {
+            currentPosition = Vector3.Lerp(startingPoint, endingPoint, i / moveTime);
+            yield return fixedWait;
+        }
+
+        currentPosition = endingPoint; // for precision
+
+        goToPointA = !goToPointA;
+        moving = false;
+
+        if (loop)
+        {
+            yield return loopWait;
+            Move(true);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (pointBTransform == null) return;
+        Gizmos.DrawWireCube(pointBTransform.position, transform.localScale);
+        Gizmos.DrawLine(transform.position, pointBTransform.position);
     }
 }

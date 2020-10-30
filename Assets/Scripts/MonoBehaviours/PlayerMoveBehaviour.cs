@@ -77,7 +77,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
+
         // Apply Movement
         controller.Move((movement + gravityForce + knockbackForce) * Time.deltaTime);
     }
@@ -100,10 +100,10 @@ public class PlayerMoveBehaviour : MonoBehaviour
             knockbackForce = Vector3.zero;
         }
 
-        if (knockbackForce.magnitude > 0)
-        {
-            movement += knockbackForce;
-        }
+        // if (knockbackForce.magnitude > 0)
+        // {
+        //     movement += knockbackForce;
+        // }
     }
 
     private void WalkRun()
