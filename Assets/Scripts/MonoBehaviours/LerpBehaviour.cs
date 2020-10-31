@@ -3,49 +3,35 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
 public class LerpBehaviour : MonoBehaviour
 {
-    public Transform pointBTransform;
-    public float moveTime, loopWaitTime;
-    public bool loopOnStart;
-
+    public Transform pointATransform, pointBTransform;
+    [Range(0,1)]
+    public float step;
     public UnityEvent pointAEvent, pointBEvent;
 
-    private bool goToPointA, moving;
-    private Vector3 pointA, pointB, currentPosition;
+    private bool eventInvoked;
+    private Animator anim;
+    private static readonly int GoToBParam = Animator.StringToHash("GoToB");
 
-    private Coroutine currentCoroutine;
-
-    private readonly WaitForFixedUpdate fixedWait = new WaitForFixedUpdate();
-    private WaitForSeconds loopWait;
-
-    public void Move(bool loop)
+    private void Start()
     {
-        if (moving) return;
-        currentCoroutine = StartCoroutine(MoveCoroutine(loop));
+        anim = GetComponent<Animator>();
     }
 
-    public void MoveToA(bool loop)
+    public void MoveToPoint(bool goToB)
     {
-        goToPointA = true;
-        Move(loop);
+        anim.SetBool(GoToBParam, goToB);
     }
 
-    public void MoveToB(bool loop)
+    public void MoveToggle()
     {
-        goToPointA = false;
-        Move(loop);
+        anim.SetBool(GoToBParam, !anim.GetBool(GoToBParam));
     }
 
-    public void Stop()
-    {
-        if (!moving) return;
-        StopCoroutine(currentCoroutine);
-        moving = false;
-    }
-
+    // v Move these two methods to a different script v
     public void SetColliderParent(Collider other)
     {
         other.transform.parent = transform;
@@ -56,64 +42,27 @@ public class LerpBehaviour : MonoBehaviour
         other.transform.parent = null;
     }
 
-    private void Start()
-    {
-        pointA = transform.position;
-        pointB = pointBTransform.position;
-        currentPosition = transform.position;
-        
-        loopWait = new WaitForSeconds(loopWaitTime);
-        
-        if (loopOnStart)
-        {
-            Move(true);
-        }
-    }
-
     private void FixedUpdate()
     {
-        transform.position = currentPosition;
-        // For some reason, the player doesn't move with the platform unless I set the transform in a FixedUpdate like this. No idea why. ¯\_(:/)_/¯
-    }
-
-    private IEnumerator MoveCoroutine(bool loop)
-    {
-        moving = true;
-        var startingPoint = pointA;
-        var endingPoint = pointB;
-        if (goToPointA)
+        Mathf.Clamp(step, 0, 1);
+        transform.position = Vector3.Lerp(pointATransform.position, pointBTransform.position, step);
+        if (!eventInvoked)
         {
-            startingPoint = pointB;
-            endingPoint = pointA;
+            if (step <= 0)
+            {
+                pointAEvent.Invoke();
+                eventInvoked = true;
+            }
+            else if (step >= 1)
+            {
+                pointBEvent.Invoke();
+                eventInvoked = true;
+            }
         }
-
-        var abDistance = Vector3.Distance(startingPoint, endingPoint);
-        var currentDistance = Vector3.Distance(transform.position, startingPoint);
-        var progress = currentDistance / abDistance;
-        progress *= moveTime;
-
-        for (var i = progress; i < moveTime; i += Time.fixedDeltaTime)
+        else if (0 < step && step < 1)
         {
-            currentPosition = Vector3.Lerp(startingPoint, endingPoint, i / moveTime);
-            yield return fixedWait;
+            eventInvoked = false;
         }
-
-        currentPosition = endingPoint; // for precision
-        if (goToPointA)
-        {
-            pointAEvent.Invoke();
-        }
-        else
-        {
-            pointBEvent.Invoke();
-        }
-
-        goToPointA = !goToPointA;
-        moving = false;
-
-        if (!loop) yield break;
-        yield return loopWait;
-        Move(true);
     }
 
     private void OnDrawGizmos()

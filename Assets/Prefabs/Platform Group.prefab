@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2738193860765022391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5962714626427780762}
+  m_Layer: 0
+  m_Name: Point A
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5962714626427780762
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2738193860765022391}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8730821955643613655}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8730821955643613654
 GameObject:
   m_ObjectHideFlags: 0
@@ -28,6 +58,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8730821956378850032}
+  - {fileID: 5962714626427780762}
   - {fileID: 8730821956407691890}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -137,6 +168,8 @@ GameObject:
   - component: {fileID: 8730821956378850045}
   - component: {fileID: 8730821956378850044}
   - component: {fileID: 8730821956378850047}
+  - component: {fileID: 2336236000287067561}
+  - component: {fileID: 1130681429654573358}
   m_Layer: 0
   m_Name: Platform
   m_TagString: DynamicWalkable
@@ -249,16 +282,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1110fe07d0b6104479a4a249f9df65a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pointATransform: {fileID: 5962714626427780762}
   pointBTransform: {fileID: 8730821956407691890}
-  moveTime: 2
-  loopWaitTime: 0
-  loopOnStart: 0
+  step: 0
   pointAEvent:
     m_PersistentCalls:
       m_Calls: []
   pointBEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &2336236000287067561
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730821956378850046}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a3b58ecc41a54d749837b8fd3e0f3d7c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!208 &1130681429654573358
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8730821956378850046}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8730821956407691901
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +336,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8730821956407691890}
   m_Layer: 0
-  m_Name: Platform Target
+  m_Name: Point B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,5 +354,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8730821955643613655}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
