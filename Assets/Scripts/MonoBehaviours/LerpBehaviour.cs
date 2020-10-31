@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(MeshFilter))]
 [RequireComponent(typeof(Rigidbody))]
@@ -9,6 +10,8 @@ public class LerpBehaviour : MonoBehaviour
     public Transform pointBTransform;
     public float moveTime, loopWaitTime;
     public bool loopOnStart;
+
+    public UnityEvent pointAEvent, pointBEvent;
 
     private bool goToPointA, moving;
     private Vector3 pointA, pointB, currentPosition;
@@ -88,7 +91,7 @@ public class LerpBehaviour : MonoBehaviour
         var currentDistance = Vector3.Distance(transform.position, startingPoint);
         var progress = currentDistance / abDistance;
         progress *= moveTime;
-        
+
         for (var i = progress; i < moveTime; i += Time.fixedDeltaTime)
         {
             currentPosition = Vector3.Lerp(startingPoint, endingPoint, i / moveTime);
@@ -96,15 +99,21 @@ public class LerpBehaviour : MonoBehaviour
         }
 
         currentPosition = endingPoint; // for precision
+        if (goToPointA)
+        {
+            pointAEvent.Invoke();
+        }
+        else
+        {
+            pointBEvent.Invoke();
+        }
 
         goToPointA = !goToPointA;
         moving = false;
 
-        if (loop)
-        {
-            yield return loopWait;
-            Move(true);
-        }
+        if (!loop) yield break;
+        yield return loopWait;
+        Move(true);
     }
 
     private void OnDrawGizmos()
