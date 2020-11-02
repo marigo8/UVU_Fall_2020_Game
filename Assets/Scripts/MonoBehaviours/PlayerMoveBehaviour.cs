@@ -16,6 +16,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
     // Variables
     public float moveSpeed = 5f, sprintModifier = 2f, slowModifier = .5f, jumpStrength = 3.5f, tempClimbStrength;
     public bool godMode;
+    public Vector3 parentForce = Vector3.zero;
     
     // PRIVATE PROPERTIES //
     
@@ -79,7 +80,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
         }
 
         // Apply Movement
-        controller.Move((movement + gravityForce + knockbackForce) * Time.deltaTime);
+        controller.Move((movement + gravityForce + knockbackForce + parentForce) * Time.deltaTime);
     }
 
     private void Gravity()
