@@ -531,7 +531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53144002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.13, y: 2.2, z: -13.1}
+  m_LocalPosition: {x: 3.6999998, y: 2.2, z: -13.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -970,15 +970,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8730821955643613655, guid: 5657129305f84444f941ed53043bfdc9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20
+      value: -0.53
       objectReference: {fileID: 0}
     - target: {fileID: 8730821955643613655, guid: 5657129305f84444f941ed53043bfdc9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8730821955643613655, guid: 5657129305f84444f941ed53043bfdc9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.96
+      value: -12.69
       objectReference: {fileID: 0}
     - target: {fileID: 8730821955643613655, guid: 5657129305f84444f941ed53043bfdc9, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1838,7 +1838,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817273492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.13, y: 5.88, z: -13.1}
+  m_LocalPosition: {x: 3.7, y: 5.88, z: -13.1}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1856,6 +1856,7 @@ GameObject:
   - component: {fileID: 828872234}
   - component: {fileID: 828872233}
   - component: {fileID: 828872232}
+  - component: {fileID: 828872236}
   m_Layer: 0
   m_Name: Conveyor Belt
   m_TagString: Untagged
@@ -1940,6 +1941,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 89.987, z: 0}
+--- !u!208 &828872236
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828872231}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &864485924
 GameObject:
   m_ObjectHideFlags: 0

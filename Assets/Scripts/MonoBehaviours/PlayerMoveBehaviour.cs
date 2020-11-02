@@ -38,6 +38,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
     {
         knockbackForce = Vector3.zero;
         gravityForce = Vector3.zero;
+        parentForce = Vector3.zero;
     }
 
     private void Start()
