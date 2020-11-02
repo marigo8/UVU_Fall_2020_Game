@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class HudTextBehaviour : MonoBehaviour
 {
     public ScriptableData[] datas;
-    
     private Text textObj;
 
     private void Start()
@@ -16,7 +15,12 @@ public class HudTextBehaviour : MonoBehaviour
 
     private void Update()
     {
-        var text = datas.Aggregate("", (current, data) => current + (data.GetString() + "\n"));
+        var text = "";
+        foreach (var data in datas)
+        {
+            text += (data.GetString() + "\n");
+        }
+
         textObj.text = text;
     }
 }

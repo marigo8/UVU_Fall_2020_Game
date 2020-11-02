@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class HudBarBehaviour : MonoBehaviour
+public class HudImageBehaviour : MonoBehaviour
 {
     public ScriptableData data;
     public Image background;
