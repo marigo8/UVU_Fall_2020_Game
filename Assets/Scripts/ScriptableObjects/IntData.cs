@@ -52,6 +52,11 @@ public class IntData : ScriptableData
         if (!useClamp) return;
 
         value = Mathf.Clamp(value, 0, maxValue);
+
+        if (value <= 0)
+        {
+            zeroEvent.Invoke();
+        }
     }
 
     public override string GetString()

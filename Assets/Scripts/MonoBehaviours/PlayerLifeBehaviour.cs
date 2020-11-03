@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,23 +34,31 @@ public class PlayerLifeBehaviour : MonoBehaviour
         
         meshRenderer.material.shaderKeywords = new[] {"_EMISSION"};
     }
-    private void Update()
-    {
-        if (health.value <= 0)
-        {
-            StartCoroutine(Die());
-        }
-    }
+    //
+    // private void OnEnable()
+    // {
+    //     spawnPoint.SetPositionFromValue(transform);
+    //     spawnDirection.SetRotationYFromValue(transform);
+    // }
+    
+    // private void Update()
+    // {
+    //     if (health.value <= 0)
+    //     {
+    //         StartCoroutine(Die());
+    //     }
+    // }
 
-    private IEnumerator Die()
+    public void Die()
     {
-        if (dead) yield break;
+        if (dead) return;
         dead = true;
         SetActive(false);
         deathEvent.Invoke();
-        
-        yield return new WaitForSeconds(respawnTime);
-        
+    }
+
+    public void Respawn()
+    {
         spawnPoint.SetPositionFromValue(transform);
         spawnDirection.SetRotationYFromValue(transform);
         
@@ -58,6 +67,24 @@ public class PlayerLifeBehaviour : MonoBehaviour
         respawnEvent.Invoke();
         StartCoroutine(Invincibility());
     }
+
+    // private IEnumerator Die()
+    // {
+    //     if (dead) yield break;
+    //     dead = true;
+    //     SetActive(false);
+    //     deathEvent.Invoke();
+    //     
+    //     yield return new WaitForSeconds(respawnTime);
+    //     
+    //     spawnPoint.SetPositionFromValue(transform);
+    //     spawnDirection.SetRotationYFromValue(transform);
+    //     
+    //     dead = false;
+    //     SetActive(true);
+    //     respawnEvent.Invoke();
+    //     StartCoroutine(Invincibility());
+    // }
 
     private void SetActive(bool isActive)
     {
