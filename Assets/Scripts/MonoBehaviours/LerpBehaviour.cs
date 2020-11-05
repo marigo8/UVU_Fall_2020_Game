@@ -21,16 +21,6 @@ public class LerpBehaviour : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public void MoveToPoint(bool goToB)
-    {
-        anim.SetBool(GoToBParam, goToB);
-    }
-
-    public void MoveToggle()
-    {
-        anim.SetBool(GoToBParam, !anim.GetBool(GoToBParam));
-    }
-
     // v Move these two methods to a different script v
     public void SetColliderParent(Collider other)
     {
