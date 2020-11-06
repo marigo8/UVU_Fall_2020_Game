@@ -15,7 +15,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
     
     // Variables
     public float moveSpeed = 5f, sprintModifier = 2f, slowModifier = .5f, jumpStrength = 3.5f, tempClimbStrength;
-    public bool godMode;
+    public bool godMode, isWalking, isRunning;
     public Vector3 parentForce = Vector3.zero;
     
     // PRIVATE PROPERTIES //
@@ -114,6 +114,8 @@ public class PlayerMoveBehaviour : MonoBehaviour
         var hInput = Input.GetAxis("Horizontal");
         var vInput = Input.GetAxis("Vertical");
         movement = new Vector3(hInput, 0, vInput);
+
+        isWalking = movement.magnitude > .1f;
         
         // Sprint
         if (Input.GetButtonDown("Sprint") && !staminaCoolingDown)
@@ -140,6 +142,8 @@ public class PlayerMoveBehaviour : MonoBehaviour
 
     private IEnumerator Sprint()
     {
+        isRunning = true;
+        
         // Sprinting Speed
         speedModifier = sprintModifier;
         
@@ -155,6 +159,8 @@ public class PlayerMoveBehaviour : MonoBehaviour
         }
         
         // Stop Sprinting
+        isRunning = false;
+        
         if (stamina.value > 0)
         {
             // Regular Speed
