@@ -15,7 +15,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
     
     // Variables
     public float moveSpeed = 5f, sprintModifier = 2f, slowModifier = .5f, jumpStrength = 3.5f, tempClimbStrength;
-    public bool godMode, isWalking, isRunning;
+    public bool godMode, isWalking, isRunning, isJumping;
     public Vector3 parentForce = Vector3.zero;
     
     // PRIVATE PROPERTIES //
@@ -189,6 +189,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
 
     private void Jump()
     {
+        isJumping = false;
         // On Grounded
         if (controller.isGrounded)
         {
@@ -202,6 +203,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
         // Jump
         if (Input.GetButtonDown("Jump") && !jumpCount.IsMaxed)
         {
+            isJumping = true;
             gravityForce.y = jumpStrength;
             jumpCount.AddToValue(1);
         }
