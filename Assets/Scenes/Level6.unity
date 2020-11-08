@@ -770,7 +770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 35.300003, y: -53.300003}
+  m_AnchoredPosition: {x: 35.30005, y: -53.299988}
   m_SizeDelta: {x: 46.539368, y: 46.539368}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &216929283
@@ -2708,63 +2708,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6700386826a5ae24aba055ea843b6dd8, type: 2}
   - {fileID: 11400000, guid: 2c3e2bfaf76a2e640914602e7183a158, type: 2}
   - {fileID: 11400000, guid: d5c217bce469aa245a1b225e679ab540, type: 2}
---- !u!1 &1202180935 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6650289279647398718, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
-  m_PrefabInstance: {fileID: 6650289278257441115}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1202180936 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6650289279647398711, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
   m_PrefabInstance: {fileID: 6650289278257441115}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202180935}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf60ce871cee4534e9ec8c24916f7282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1202180941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1202180935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90bb9716b14a0be45a7a5dd69c8f5623, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameAction: {fileID: 11400000, guid: d636c90a0c618e445b61ef4c762ff4e1, type: 2}
-  delay: 0
-  handlerEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 11400000, guid: 8912dd3b3f5087144b88d6e7dd69177f, type: 2}
-        m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1202180936}
-        m_TargetAssemblyTypeName: PlayerLifeBehaviour, Assembly-CSharp
-        m_MethodName: Die
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: majide
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1345094999
 GameObject:
   m_ObjectHideFlags: 0
@@ -4120,21 +4074,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6650289279647398706, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6650289279647398706, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6650289279647398718, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6650289279647398718, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
