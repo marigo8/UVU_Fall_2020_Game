@@ -208,6 +208,7 @@ GameObject:
   - component: {fileID: 6650289279647398705}
   - component: {fileID: 6650289279647398711}
   - component: {fileID: 1202180941}
+  - component: {fileID: 205267583}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -317,8 +318,8 @@ MonoBehaviour:
   sprintModifier: 2
   slowModifier: 0.5
   jumpStrength: 8
-  tempClimbStrength: 0
-  godMode: 0
+  tempClimbStrength: 8
+  godMode: 1
   isWalking: 0
   isRunning: 0
   isJumping: 0
@@ -399,3 +400,18 @@ MonoBehaviour:
           m_StringArgument: majide
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &205267583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6650289279647398718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea460969b6821c64b932112aa8188c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 100
+  activeTarget: 1
+  life: 0
