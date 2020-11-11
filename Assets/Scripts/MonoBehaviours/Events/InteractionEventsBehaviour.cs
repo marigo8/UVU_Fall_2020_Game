@@ -6,7 +6,7 @@ public class InteractionEventsBehaviour : MonoBehaviour
 {
     public bool toggle;
     
-    public UnityEvent onInteractionEvent, offInteractionEvent;
+    public UnityEvent onInteractionEvent, offInteractionEvent, onReadyEvent, offReadyEvent;
 
     private Collider col;
     private bool ready, toggleOn = true;
@@ -42,11 +42,13 @@ public class InteractionEventsBehaviour : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         ready = true;
+        onReadyEvent.Invoke();
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("Player")) return;
         ready = false;
+        offReadyEvent.Invoke();
     }
 }
