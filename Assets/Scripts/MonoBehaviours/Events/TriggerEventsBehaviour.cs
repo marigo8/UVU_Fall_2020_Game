@@ -10,6 +10,11 @@ public class TriggerEventsBehaviour : MonoBehaviour
     public UnityEvent<Collider> triggerStayEvent;
     public UnityEvent<Collider> triggerExitEvent;
 
+    public void Destroy(GameObject obj)
+    {
+        GameObject.Destroy(obj);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (filterTag != "") // If there is no tag, just invoke the event.

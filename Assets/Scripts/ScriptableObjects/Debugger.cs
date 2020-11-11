@@ -7,4 +7,9 @@ public class Debugger : ScriptableObject
     {
         Debug.Log(message);
     }
+
+    public void DebugCollider(Collider other)
+    {
+        Debug.Log(other);
+    }
 }
