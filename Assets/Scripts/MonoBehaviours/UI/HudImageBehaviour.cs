@@ -17,7 +17,7 @@ public class HudImageBehaviour : MonoBehaviour
         imageObj = GetComponent<Image>();
     }
 
-    private void Update()
+    public void UpdateHud()
     {
         var fraction = data.GetFraction();
 

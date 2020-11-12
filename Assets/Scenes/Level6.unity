@@ -654,6 +654,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: c835c8e968695cb4fbdd614f5d9a5561, type: 2}
+        m_TargetAssemblyTypeName: GameAction, Assembly-CSharp
+        m_MethodName: Raise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   offInteractionEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1357,6 +1369,7 @@ GameObject:
   - component: {fileID: 777783732}
   - component: {fileID: 777783731}
   - component: {fileID: 777783730}
+  - component: {fileID: 777783733}
   m_Layer: 5
   m_Name: Health Bar
   m_TagString: Untagged
@@ -1493,6 +1506,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777783728}
   m_CullTransparentMesh: 0
+--- !u!114 &777783733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777783728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bb9716b14a0be45a7a5dd69c8f5623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameAction: {fileID: 11400000, guid: c835c8e968695cb4fbdd614f5d9a5561, type: 2}
+  delay: 0
+  handlerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 777783730}
+        m_TargetAssemblyTypeName: HudImageBehaviour, Assembly-CSharp
+        m_MethodName: UpdateHud
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &813947290
 GameObject:
   m_ObjectHideFlags: 0
@@ -3354,6 +3396,7 @@ GameObject:
   - component: {fileID: 1591322999}
   - component: {fileID: 1591322998}
   - component: {fileID: 1591322997}
+  - component: {fileID: 1591323000}
   m_Layer: 5
   m_Name: Stamina Wheel
   m_TagString: Untagged
@@ -3490,6 +3533,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591322995}
   m_CullTransparentMesh: 0
+--- !u!114 &1591323000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591322995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90bb9716b14a0be45a7a5dd69c8f5623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameAction: {fileID: 11400000, guid: fdebb646e802af24fa8c234b0ce1c174, type: 2}
+  delay: 0
+  handlerEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1591322997}
+        m_TargetAssemblyTypeName: HudImageBehaviour, Assembly-CSharp
+        m_MethodName: UpdateHud
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &1688155566 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2336236000287067561, guid: 5657129305f84444f941ed53043bfdc9, type: 3}
@@ -4159,6 +4231,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6650289279647398705, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
+      propertyPath: godMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6650289279647398706, guid: 7d7c2866155744f429fe6d5ae5942cb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.05

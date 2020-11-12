@@ -1,22 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu]
 public class IntData : ScriptableData
 {
-    public int value, maxValue, startValue, startMax;
+    public int value, maxValue;
     public bool useClamp;
     public bool IsMaxed => value >= maxValue;
 
+    public UnityEvent updateValueEvent;
     public UnityEvent zeroEvent;
-
-    private void OnEnable()
-    {
-        if (!useStartingValue) return;
-        value = startValue;
-        maxValue = startMax;
-    }
-
 
     public void AddToValue(int amount)
     {
@@ -44,19 +38,21 @@ public class IntData : ScriptableData
 
     public void SetValueToMax()
     {
-        value = maxValue;
+        SetValue(maxValue);
     }
 
     private void ClampValue()
     {
-        if (!useClamp) return;
-
-        value = Mathf.Clamp(value, 0, maxValue);
-
-        if (value <= 0)
+        if (useClamp)
         {
-            zeroEvent.Invoke();
+            value = Mathf.Clamp(value, 0, maxValue);
+
+            if (value <= 0)
+            {
+                zeroEvent.Invoke();
+            }
         }
+        updateValueEvent.Invoke();
     }
 
     public override string GetString()
