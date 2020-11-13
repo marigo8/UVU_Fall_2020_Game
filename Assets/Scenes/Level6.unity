@@ -1821,7 +1821,7 @@ GameObject:
   - component: {fileID: 842994276}
   - component: {fileID: 842994275}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Press E
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
