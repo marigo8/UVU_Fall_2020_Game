@@ -14,7 +14,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
     public CharacterStateData characterState;
     
     // Variables
-    public float moveSpeed = 5f, sprintModifier = 2f, slowModifier = .5f, jumpStrength = 3.5f, tempClimbStrength;
+    public float moveSpeed = 5f, sprintModifier = 2f, slowModifier = .5f, jumpStrength = 8f, tempClimbStrength = 8f;
     public bool godMode, isWalking, isRunning, isJumping;
     public Vector3 parentForce = Vector3.zero;
     
