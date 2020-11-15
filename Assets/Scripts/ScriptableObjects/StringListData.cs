@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu]
 public class StringListData : ScriptableObject
@@ -18,5 +19,10 @@ public class StringListData : ScriptableObject
         var line = data[index];
         index = (index + 1) % data.Count;
         return line;
+    }
+
+    public void DisplayNextString(Text textObj)
+    {
+        textObj.text = GetNextString();
     }
 }
