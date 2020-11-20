@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb7707b2c5b79a448ebb37dc6a34be6, type: 3}
-  m_Name: TennisBallCount
+  m_Script: {fileID: 11500000, guid: a941ab928e80c0d4fb19760fbf0d1d32, type: 3}
+  m_Name: EnemyPatrolSpeed
   m_EditorClassIdentifier: 
-  label: Tennis Balls
-  value: 15
+  label: 
+  value: 3
   maxValue: 0
   useClamp: 0
   updateValueEvent:

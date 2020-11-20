@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AITargetBehaviour : MonoBehaviour
 {
     public int priority;
-    public bool activeTarget = true;
-
-    public float life;
-
-    public void SubtractLife()
+    public void CallAI(AIBehaviour ai)
     {
-        life -= Time.fixedDeltaTime;
+        ai.AddPotentialTarget(this);
+    }
 
-        if (life <= 0)
-        {
-            activeTarget = false;
-        }
+    public void CallAI(Collider other)
+    {
+        var ai = other.GetComponent<AIBehaviour>();
+        if (ai == null) return;
+        CallAI(ai);
     }
 }

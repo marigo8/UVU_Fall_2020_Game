@@ -9,16 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fb7707b2c5b79a448ebb37dc6a34be6, type: 3}
-  m_Name: TennisBallCount
+  m_Script: {fileID: 11500000, guid: 8d5788900659dfa419b9d65c3afebb8f, type: 3}
+  m_Name: PatrolPoints
   m_EditorClassIdentifier: 
-  label: Tennis Balls
-  value: 15
-  maxValue: 0
-  useClamp: 0
-  updateValueEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  zeroEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  vector3List: []
