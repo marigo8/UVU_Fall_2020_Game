@@ -4,7 +4,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
 public class TriggerEventsBehaviour : MonoBehaviour
 {
-    public string filterTag;
+    //public string filterTag;
+    public IdData filterID;
     
     public UnityEvent<Collider> triggerEnterEvent;
     public UnityEvent<Collider> triggerStayEvent;
@@ -17,27 +18,27 @@ public class TriggerEventsBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (filterTag != "") // If there is no tag, just invoke the event.
+        if (filterID != null)
         {
-            if (!other.CompareTag(filterTag)) return; // if there is a tag but it doesn't match, don't invoke the event.
+            if (!filterID.Compare(other.gameObject)) return;
         }
         triggerEnterEvent.Invoke(other);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (filterTag != "")
+        if (filterID != null)
         {
-            if (!other.CompareTag(filterTag)) return;
+            if (!filterID.Compare(other.gameObject)) return;
         }
         triggerStayEvent.Invoke(other);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (filterTag != "")
+        if (filterID != null)
         {
-            if (!other.CompareTag(filterTag)) return;
+            if (!filterID.Compare(other.gameObject)) return;
         }
         triggerExitEvent.Invoke(other);
     }
